@@ -14,11 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Alex
- */
 public class ProgramInfoController {
     
     private Stage stage;
@@ -26,7 +21,6 @@ public class ProgramInfoController {
     private Parent root;
     
     
-    @FXML
     public void switchToStartMenu(ActionEvent event) throws IOException {
     Parent root = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
     stage = (Stage)((Node)event.getSource()).getScene().getWindow();

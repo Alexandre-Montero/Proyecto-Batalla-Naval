@@ -14,20 +14,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Alex
- */
 public class ModeMenuController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    @FXML
-    private Button btnScene2Menu;
+    
     @FXML
     private Button btnPlayerVSPlayer;
     @FXML
     private Button PlayerVSAI;
+    @FXML
+    private Button btnStartMenu;
 
     @FXML
     public void switchToStartMenu(ActionEvent event) throws IOException {

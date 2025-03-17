@@ -12,7 +12,7 @@
             <Font name="Arial Black" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btnScene2Menu" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="345.0" mnemonicParsing="false" onAction="#switchToStartMenu" text="Menú" textAlignment="CENTER">
+      <Button fx:id="btnStartMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="345.0" mnemonicParsing="false" onAction="#switchToStartMenu" text="Menú" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>

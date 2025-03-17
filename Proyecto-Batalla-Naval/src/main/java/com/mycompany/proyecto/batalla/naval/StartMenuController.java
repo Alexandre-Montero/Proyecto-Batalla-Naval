@@ -12,12 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Alex
- */
 public class StartMenuController {
 
     private Stage stage;
@@ -28,6 +25,8 @@ public class StartMenuController {
     private Button btnProgramInformation;
     @FXML
     private Button btnPlay;
+    @FXML
+    private Label textGameName;
     
     @FXML
     public void switchToModeMenu(ActionEvent event)throws IOException{
