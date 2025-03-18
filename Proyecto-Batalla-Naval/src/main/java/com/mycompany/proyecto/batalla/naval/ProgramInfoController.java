@@ -19,8 +19,10 @@ public class ProgramInfoController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private Button btnStartMenu;
     
-    
+    @FXML
     public void switchToStartMenu(ActionEvent event) throws IOException {
     Parent root = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
     stage = (Stage)((Node)event.getSource()).getScene().getWindow();

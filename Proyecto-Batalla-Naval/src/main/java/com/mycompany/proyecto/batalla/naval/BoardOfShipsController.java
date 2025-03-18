@@ -1,6 +1,6 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package com.mycompany.proyecto.batalla.naval;
 
@@ -14,29 +14,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class ModeMenuController {
+public class BoardOfShipsController {
+    
     private Stage stage;
     private Scene scene;
     private Parent root;
     
     @FXML
-    private Button btnPlayerVSPlayer;
-    @FXML
-    private Button btnStartMenu;
-    @FXML
-    private Button btnPlayerVSAI;
-
-    @FXML
-    public void switchToStartMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    
-    @FXML
-    public void switchToDifficultyMenu (ActionEvent event) throws IOException {
+    public void switToDifficultyMenu (ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("DifficultyMenu.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

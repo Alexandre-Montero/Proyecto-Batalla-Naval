@@ -5,26 +5,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto.batalla.naval.ModeMenuController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyecto.batalla.naval.ModeMenuController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="14.0" text="Elegir Contrincante" textAlignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="15.0" prefHeight="35.0" prefWidth="800.0" text="Elegir Contrincante" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnStartMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="350.0" layoutY="500.0" mnemonicParsing="false" onAction="#switchToStartMenu" prefHeight="45.0" prefWidth="100.0" text="Menu" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="18.0" />
          </font>
-      </Label>
-      <Button fx:id="btnStartMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="300.0" layoutY="345.0" mnemonicParsing="false" onAction="#switchToStartMenu" text="Menú" textAlignment="CENTER">
+      </Button>
+      <Button fx:id="btnPlayerVSPlayer" alignment="CENTER" contentDisplay="CENTER" layoutX="90.0" layoutY="510.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="200.0" text="Jugador VS Jugador" textAlignment="CENTER">
          <font>
-            <Font name="Arial Black" size="14.0" />
+            <Font name="Arial Black" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnPlayerVSPlayer" alignment="CENTER" contentDisplay="CENTER" layoutX="120.0" layoutY="300.0" mnemonicParsing="false" text="Jugador VS Jugador" textAlignment="CENTER">
+      <Button fx:id="btnPlayerVSAI" alignment="CENTER" contentDisplay="CENTER" layoutX="520.0" layoutY="510.0" mnemonicParsing="false" onAction="#switchToDifficultyMenu" prefHeight="35.0" prefWidth="170.0" text="Jugador VS AI" textAlignment="CENTER">
          <font>
-            <Font name="Arial Black" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="PlayerVSAI" alignment="CENTER" contentDisplay="CENTER" layoutX="365.0" layoutY="300.0" mnemonicParsing="false" text="Jugador VS AI" textAlignment="CENTER">
-         <font>
-            <Font name="Arial Black" size="14.0" />
+            <Font name="Arial Black" size="16.0" />
          </font>
       </Button>
    </children>

@@ -27,6 +27,8 @@ public class StartMenuController {
     private Button btnPlay;
     @FXML
     private Label textGameName;
+    @FXML
+    private Button btnRegisterNames;
     
     @FXML
     public void switchToModeMenu(ActionEvent event)throws IOException{
