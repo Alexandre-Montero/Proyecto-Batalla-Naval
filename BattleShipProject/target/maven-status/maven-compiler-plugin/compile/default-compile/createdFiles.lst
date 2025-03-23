@@ -1,0 +1,11 @@
+Game\Controllers\Boards\EasyBoardPlacesOfShipsController.class
+Game\Controllers\DifficultyMenuController.class
+Game\Classes\GameState.class
+module-info.class
+Game\Controllers\ConfigurationController.class
+Game\Controllers\StartMenuController.class
+Game\App.class
+Game\Controllers\Boards\NormalBoardPlacesOfShipsController.class
+Game\Controllers\ModeMenuController.class
+Game\Controllers\Boards\HardBoardPlacesOfShipsController.class
+Game\Controllers\ProgramInfoController.class
