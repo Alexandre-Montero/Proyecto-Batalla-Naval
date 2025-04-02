@@ -22,12 +22,12 @@
             <Font name="Arial Black" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnConfiguration" alignment="CENTER" contentDisplay="CENTER" layoutX="497.5" layoutY="480.0" mnemonicParsing="false" onAction="#switchToConfiguration" prefHeight="35.0" prefWidth="130.0" stylesheets="@../Styles/startmenu.css" text="Configuración" textAlignment="CENTER">
+      <Button fx:id="btnConfiguration" alignment="CENTER" contentDisplay="CENTER" layoutX="467.5" layoutY="480.0" mnemonicParsing="false" onAction="#switchToConfiguration" prefHeight="35.0" prefWidth="130.0" stylesheets="@../Styles/startmenu.css" text="Configuración" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="lbGameName" alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="20.0" prefHeight="40.0" prefWidth="140.0" stylesheets="@../Styles/startmenu.css" text="BattleShip">
+      <Label fx:id="lbGameName" alignment="CENTER" contentDisplay="CENTER" layoutX="316.0" layoutY="14.0" prefHeight="40.0" prefWidth="179.0" stylesheets="@../Styles/startmenu.css" text="Batalla Naval" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="24.0" />
          </font>
@@ -50,7 +50,7 @@
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lbAddPlayers" alignment="CENTER" contentDisplay="CENTER" layoutX="285.0" layoutY="280.0" stylesheets="@../Styles/startmenu.css" text="Agregar nombre de Jugadores" textAlignment="CENTER">
+      <Label fx:id="lbAddPlayers" alignment="CENTER" contentDisplay="CENTER" layoutX="290.0" layoutY="280.0" stylesheets="@../Styles/startmenu.css" text="Agregar nombre de Jugadores" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
@@ -60,17 +60,17 @@
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lbPlayerOneUsername" alignment="CENTER" contentDisplay="CENTER" layoutX="360.0" layoutY="380.0" textAlignment="CENTER">
+      <Label fx:id="lbPlayerOneUsername" alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="380.0" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lbPlayerTwoUsername" alignment="CENTER" contentDisplay="CENTER" layoutX="360.0" layoutY="410.0" textAlignment="CENTER">
+      <Label fx:id="lbPlayerTwoUsername" alignment="CENTER" contentDisplay="CENTER" layoutX="335.0" layoutY="410.0" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lbWarningPlayerOneObligatory" alignment="CENTER" contentDisplay="CENTER" layoutX="310.0" layoutY="435.0" textAlignment="CENTER">
+      <Label fx:id="lbWarningPlayerOneObligatory" alignment="CENTER" contentDisplay="CENTER" layoutX="310.0" layoutY="440.0" stylesheets="@../Styles/startmenu.css" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>

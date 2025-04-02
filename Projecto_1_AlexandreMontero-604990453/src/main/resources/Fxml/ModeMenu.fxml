@@ -11,22 +11,22 @@
         <URL value="@/Styles/modemenu.css" />
     </stylesheets>
    <children>
-      <Label fx:id="lbEnemySelectionTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="253.0" layoutY="25.0" prefHeight="40.0" prefWidth="295.0" text="Elegir un Contrincante" textAlignment="CENTER">
+      <Label fx:id="lbEnemySelectionTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="253.0" layoutY="25.0" prefHeight="40.0" prefWidth="295.0" stylesheets="@../Styles/modemenu.css" text="Elegir un Contrincante" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnReturnToStartMenu" layoutX="355.0" layoutY="480.0" mnemonicParsing="false" onAction="#switchToStartMenu" prefHeight="35.0" prefWidth="90.0" text="Regresar">
+      <Button fx:id="btnReturnToStartMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="480.0" mnemonicParsing="false" onAction="#switchToStartMenu" prefHeight="35.0" prefWidth="90.0" stylesheets="@../Styles/modemenu.css" text="Regresar" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="PlayerVSPlayer" alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="480.0" mnemonicParsing="false" onAction="#startPlayerVSPlayer" prefHeight="35.0" prefWidth="200.0" text="Jugador VS Jugador" textAlignment="CENTER">
+      <Button fx:id="PlayerVSPlayer" alignment="CENTER" contentDisplay="CENTER" layoutX="125.0" layoutY="480.0" mnemonicParsing="false" onAction="#startPlayerVSPlayer" prefHeight="35.0" prefWidth="200.0" stylesheets="@../Styles/modemenu.css" text="Jugador VS Jugador" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnPlayerVSAI" alignment="CENTER" contentDisplay="CENTER" layoutX="480.0" layoutY="480.0" mnemonicParsing="false" onAction="#startPlayerVSAI" prefHeight="35.0" prefWidth="150.0" text="Jugador VS AI">
+      <Button fx:id="btnPlayerVSAI" alignment="CENTER" contentDisplay="CENTER" layoutX="475.0" layoutY="480.0" mnemonicParsing="false" onAction="#startPlayerVSAI" prefHeight="35.0" prefWidth="150.0" stylesheets="@../Styles/modemenu.css" text="Jugador VS AI">
          <font>
             <Font name="Arial Black" size="16.0" />
          </font>

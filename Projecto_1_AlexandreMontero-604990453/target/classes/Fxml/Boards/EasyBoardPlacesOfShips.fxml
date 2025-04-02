@@ -10,12 +10,12 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="Game.Controllers.Boards.EasyBoardPlacesOfShipsController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.EasyBoardPlacesOfShipsController">
     <stylesheets>
         <URL value="@/Styles/Boards/easyboardplacesofships.css" />
     </stylesheets>
    <children>
-      <GridPane fx:id="GridBoard" alignment="CENTER" gridLinesVisible="true" layoutX="300.0" layoutY="40.0" prefHeight="380.0" prefWidth="450.0" stylesheets="@../../Styles/Boards/easyboardplacesofships.css">
+      <GridPane fx:id="GridBoard" alignment="CENTER" gridLinesVisible="true" layoutX="303.0" layoutY="42.0" onDragDropped="#handleDragDropped" onDragOver="#setupGridPane" prefHeight="380.0" prefWidth="450.0" stylesheets="@../../Styles/Boards/easyboardplacesofships.css">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -67,7 +67,7 @@
             <Font name="Arial Black" size="16.0" />
          </font>
       </Label>
-      <Circle fx:id="submarineOne" layoutX="40.0" layoutY="75.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="submarineTwo" layoutX="85.0" layoutY="75.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="submarineOne" layoutX="40.0" layoutY="75.0" onDragDetected="#setupDraggable" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="submarineTwo" layoutX="85.0" layoutY="75.0" onDragDetected="#setupDraggable" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
