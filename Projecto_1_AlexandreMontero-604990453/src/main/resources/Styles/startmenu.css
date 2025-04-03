@@ -1,0 +1,14 @@
+.mainFxmlClass {
+    
+}
+
+.button{
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-border-radius: 15;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-background-radius: 15;
+    -fx-pref-height: 35px;
+}
