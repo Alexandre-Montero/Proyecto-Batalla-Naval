@@ -88,13 +88,13 @@ public class DifficultyMenuController implements Initializable {
 
         switch (selectedDifficulty) {
             case "Easy":
-                fxmlFile = "/Fxml/Boards/easyboardplacesofships.fxml";
+                fxmlFile = "/Fxml/Boards/playeroneeasyboard.fxml";
                 break;
             case "Normal":
-                fxmlFile = "/Fxml/Boards/normalboardplacesofships.fxml";
+                fxmlFile = "/Fxml/Boards/playeronenormalboard.fxml";
                 break;
             case "Hard":
-                fxmlFile = "/Fxml/Boards/hardboardplacesofships.fxml";
+                fxmlFile = "/Fxml/Boards/playeronehardboard.fxml";
                 break;
         }
 

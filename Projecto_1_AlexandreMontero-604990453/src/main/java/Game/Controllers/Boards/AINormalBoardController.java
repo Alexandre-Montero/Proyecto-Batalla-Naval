@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author Alexandre Montero
  */
-public class HardBoardPlacesOfShipsController implements Initializable {
+public class AINormalBoardController implements Initializable {
 
     /**
      * Initializes the controller class.

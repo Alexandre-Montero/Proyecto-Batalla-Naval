@@ -1,10 +1,9 @@
 package Game.Controllers.Boards;
 
+import Game.Classes.ShipPlacementManager;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -27,7 +27,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class EasyBoardPlacesOfShipsController implements Initializable {
+public class PlayerOneNormalBoardController implements Initializable {
 
     private Stage stage;
     private Scene scene;
@@ -37,11 +37,13 @@ public class EasyBoardPlacesOfShipsController implements Initializable {
     private Canvas canvasPlayer;
 
     private final int cellSize = 40;
+    private ShipPlacementManager shipManager = ShipPlacementManager.getInstance(); // Usar el singleton de ShipPlacementManager
+
     private String[][] playerBoard = new String[10][10];
     private Map<String, Integer> shipSizes = new HashMap<>();
     private Map<String, Integer> shipLimits = new HashMap<>();
     private Map<String, Integer> placedCount = new HashMap<>();
-    private List<ShipPlacement> placedShips = new ArrayList<>();
+
     @FXML
     private ImageView BtnShipDestruyer;
     @FXML
@@ -50,6 +52,8 @@ public class EasyBoardPlacesOfShipsController implements Initializable {
     private ImageView BtnShipCruise;
     @FXML
     private ImageView BtnShipArmored;
+    @FXML
+    private Button btnReturnToDifficultyMenu;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,10 +68,10 @@ public class EasyBoardPlacesOfShipsController implements Initializable {
         shipSizes.put("Destructor", 2);
         shipSizes.put("Acorazado", 4);
 
-        shipLimits.put("Submarino", 3);
-        shipLimits.put("Crucero", 2);
-        shipLimits.put("Destructor", 2);
-        shipLimits.put("Acorazado", 1);
+        shipLimits.put("Submarino", 5);
+        shipLimits.put("Crucero", 4);
+        shipLimits.put("Destructor", 3);
+        shipLimits.put("Acorazado", 2);
 
         placedCount.put("Submarino", 0);
         placedCount.put("Crucero", 0);
@@ -105,6 +109,7 @@ public class EasyBoardPlacesOfShipsController implements Initializable {
                 if (placedCount.get(type) >= shipLimits.get(type)) {
                     showAlert("Ya colocaste el límite de " + type);
                 } else if (canPlaceShip(row, col, size)) {
+                    // Coloca el barco en el tablero y en el ShipPlacementManager
                     placeShip(row, col, type, size);
                     success = true;
                 }
@@ -112,17 +117,18 @@ public class EasyBoardPlacesOfShipsController implements Initializable {
             event.setDropCompleted(success);
             event.consume();
         });
+
         drawGrid();
     }
 
     private class ShipPlacement {
 
-        int row, columns, size;
+        int row, column, size;
         String type;
 
-        ShipPlacement(int row, int columns, String type, int size) {
+        ShipPlacement(int row, int column, String type, int size) {
             this.row = row;
-            this.columns = columns;
+            this.column = column;
             this.type = type;
             this.size = size;
         }
@@ -137,17 +143,16 @@ public class EasyBoardPlacesOfShipsController implements Initializable {
         event.consume();
     }
 
-    private boolean canPlaceShip(int row, int columns, int size) {
-
-        if (row < 0 || row >= 10 || columns < 0 || columns >= 10) {
+    private boolean canPlaceShip(int row, int column, int size) {
+        if (row < 0 || row >= 10 || column < 0 || column >= 10) {
             return false;
         }
 
-        if (columns + size > 10) {
+        if (column + size > 10) {
             return false;
         }
 
-        for (int j = columns; j < columns + size; j++) {
+        for (int j = column; j < column + size; j++) {
             if (!playerBoard[row][j].equals("~")) {
                 return false;
             }
@@ -155,14 +160,16 @@ public class EasyBoardPlacesOfShipsController implements Initializable {
         return true;
     }
 
-    private void placeShip(int row, int columns, String type, int size) {
-
-        for (int j = columns; j < columns + size; j++) {
+    private void placeShip(int row, int column, String type, int size) {
+        for (int j = column; j < column + size; j++) {
             playerBoard[row][j] = type;
         }
 
-        placedShips.add(new ShipPlacement(row, columns, type, size));
+        // Añadir al ShipPlacementManager
+        shipManager.addShipPlacement(row, column, type, size);
+
         placedCount.put(type, placedCount.get(type) + 1);
+
         drawGrid();
     }
 
@@ -170,13 +177,15 @@ public class EasyBoardPlacesOfShipsController implements Initializable {
         GraphicsContext gc = canvasPlayer.getGraphicsContext2D();
         gc.clearRect(0, 0, canvasPlayer.getWidth(), canvasPlayer.getHeight());
 
-        for (ShipPlacement sp : placedShips) {
+        // Dibuja todos los barcos colocados
+        for (Game.Classes.ShipPlacementManager.ShipPlacement sp : shipManager.getPlacedShips()) {
             Image img = getImageForShip(sp.type);
             if (img != null) {
-                gc.drawImage(img, sp.columns * cellSize, sp.row * cellSize, sp.size * cellSize, cellSize);
+                gc.drawImage(img, sp.column * cellSize, sp.row * cellSize, sp.size * cellSize, cellSize);
             }
         }
 
+        // Dibuja la cuadrícula
         gc.setStroke(Color.BLACK);
         for (int i = 0; i <= 10; i++) {
             gc.strokeLine(i * cellSize, 0, i * cellSize, cellSize * 10);
@@ -185,7 +194,6 @@ public class EasyBoardPlacesOfShipsController implements Initializable {
     }
 
     private Image getImageForShip(String type) {
-
         String imagePath = "/Images/";
         switch (type) {
             case "Destructor":
@@ -201,6 +209,7 @@ public class EasyBoardPlacesOfShipsController implements Initializable {
         }
     }
 
+    @FXML
     public void switchToDifficultyMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/difficultymenu.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
