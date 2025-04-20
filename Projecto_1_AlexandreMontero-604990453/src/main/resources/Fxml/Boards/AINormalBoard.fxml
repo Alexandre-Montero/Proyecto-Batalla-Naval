@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.AINormalBoardController">
-    <stylesheets>
-        <URL value="@/Styles/Boards/ainormalboard.css"/>
-    </stylesheets>
+<AnchorPane prefHeight="487.0" prefWidth="702.0" style="-fx-background-color: white;" stylesheets="@../../Styles/Boards/ainormalboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.AINormalBoardController">
+    <children>
+        <Canvas fx:id="canvasComputer" height="400" width="400" />
+        <ImageView fx:id="BtnShipDestruyer" fitHeight="119.0" fitWidth="108.0" layoutX="500.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../Images/destructor.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="BtnShipSubmarine" fitHeight="101.0" fitWidth="118.0" layoutX="500.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../Images/submarine.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="BtnShipCruise" fitHeight="108.0" fitWidth="108.0" layoutX="500.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../Images/cruser.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="BtnShipArmored" fitHeight="108.0" fitWidth="94.0" layoutX="502.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../Images/battleship.png" />
+            </image>
+        </ImageView>
+        <Text layoutX="75.0" layoutY="30.0" strokeWidth="0.0" text="Pantalla del Jugador" wrappingWidth="148.4722900390625" />
+    </children>
 </AnchorPane>

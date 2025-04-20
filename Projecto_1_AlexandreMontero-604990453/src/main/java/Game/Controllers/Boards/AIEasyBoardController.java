@@ -1,15 +1,10 @@
 package Game.Controllers.Boards;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import Game.Classes.ShipComputerPlacementManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -18,130 +13,176 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.*;
+import javafx.scene.image.ImageView;
+
 public class AIEasyBoardController implements Initializable {
 
-    private final int cellSize = 40;
-    private String[][] aiBoard = new String[10][10]; // Tablero de la IA
-
-    private Map<String, Integer> shipSizes = new HashMap<>();
-    private Map<String, Integer> shipLimits = new HashMap<>();
-    private Map<String, Integer> placedCount = new HashMap<>();
-
     @FXML
-    private Canvas canvasAI;
+    private Canvas canvasComputer;
+
+    private final ShipComputerPlacementManager computerShipsManager = ShipComputerPlacementManager.getInstance();
+    private final int cellSize = 40;
+    private final String[][] computerBoard = new String[10][10];
+    private final List<ShipUbication> placedShips = new ArrayList<>();
+    private final Map<String, Integer> shipSizes = new HashMap<>();
+    private final Map<String, Integer> shipLimits = new HashMap<>();
+    @FXML
+    private ImageView BtnShipDestruyer;
+    @FXML
+    private ImageView BtnShipSubmarine;
+    @FXML
+    private ImageView BtnShipCruise;
+    @FXML
+    private ImageView BtnShipArmored;
+
+    private static class ShipUbication {
+        int row, column, size;
+        String type;
+        boolean horizontal;
+
+        ShipUbication(int row, int column, String type, int size, boolean horizontal) {
+            this.row = row;
+            this.column = column;
+            this.type = type;
+            this.size = size;
+            this.horizontal = horizontal;
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Inicializar los tamaños de los barcos
-        shipSizes.put("Submarino", 1);
-        shipSizes.put("Crucero", 3);
-        shipSizes.put("Destructor", 2);
-        shipSizes.put("Acorazado", 4);
+        initializeSettings();
+        initializeBoard();
 
-        shipLimits.put("Submarino", 5);
-        shipLimits.put("Crucero", 4);
-        shipLimits.put("Destructor", 3);
-        shipLimits.put("Acorazado", 2);
-
-        placedCount.put("Submarino", 0);
-        placedCount.put("Crucero", 0);
-        placedCount.put("Destructor", 0);
-        placedCount.put("Acorazado", 0);
-
-        // Llamar a la IA para que coloque sus barcos de manera aleatoria
-        placeRandomShips();
-
-        // Dibujar la cuadrícula en el canvas
-        drawGrid();
-    }
-
-    // Método que coloca los barcos de la IA de manera aleatoria
-    private void placeRandomShips() {
-        String[] shipTypes = {"Destructor", "Submarino", "Crucero", "Acorazado"};
-
-        for (String shipType : shipTypes) {
-            int shipSize = shipSizes.get(shipType);
-            int placedShips = 0;
-
-            while (placedShips < shipLimits.get(shipType)) {
-                // Intentar colocar el barco de manera aleatoria
-                int row = (int) (Math.random() * 10);
-                int col = (int) (Math.random() * 10);
-                boolean isHorizontal = Math.random() < 0.5; // Decide si el barco se coloca horizontal o verticalmente
-
-                // Verifica si el barco puede ser colocado en la posición aleatoria
-                if (canPlaceShip(row, col, shipSize, isHorizontal)) {
-                    placeShip(row, col, shipType, shipSize, isHorizontal);
-                    placedShips++;
-                }
-            }
-        }
-        drawGrid(); // Redibuja después de colocar los barcos
-    }
-
-    // Verifica si el barco puede ser colocado en la posición dada
-    private boolean canPlaceShip(int row, int col, int size, boolean isHorizontal) {
-        if (row < 0 || row >= 10 || col < 0 || col >= 10) {
-            return false;
-        }
-
-        if (isHorizontal) {
-            if (col + size > 10) {
-                return false; // No cabe horizontalmente
-            }
-            for (int j = col; j < col + size; j++) {
-                if (aiBoard[row][j] != null) {
-                    return false; // Ya hay un barco en esa posición
-                }
+        if (computerShipsManager.getShips().isEmpty()) {
+            putShipsIA();
+            for (ShipComputerPlacementManager.ShipPlacement ship : computerShipsManager.getShips()) {
+                placedShips.add(new ShipUbication(ship.row, ship.column, ship.type, ship.size, ship.horizontal));
             }
         } else {
-            if (row + size > 10) {
-                return false; // No cabe verticalmente
-            }
-            for (int i = row; i < row + size; i++) {
-                if (aiBoard[i][col] != null) {
-                    return false; // Ya hay un barco en esa posición
-                }
-            }
-        }
-        return true;
-    }
-
-    // Coloca un barco en el tablero de la IA
-    private void placeShip(int row, int col, String type, int size, boolean isHorizontal) {
-        for (int i = 0; i < size; i++) {
-            if (isHorizontal) {
-                aiBoard[row][col + i] = type;
-            } else {
-                aiBoard[row + i][col] = type;
-            }
-        }
-
-        drawGrid(); // Redibuja la cuadrícula después de colocar el barco
-    }
-
-    // Dibuja la cuadrícula y los barcos de la IA en el canvas
-    private void drawGrid() {
-        if (canvasAI == null) {
-            return; // Asegúrate de que el canvas esté inicializado
-        }
-        GraphicsContext gc = canvasAI.getGraphicsContext2D();
-        gc.clearRect(0, 0, canvasAI.getWidth(), canvasAI.getHeight());  // Limpiar la pantalla para redibujar
-
-        // Dibuja los barcos en el tablero de la IA
-        for (int row = 0; row < 10; row++) {
-            for (int col = 0; col < 10; col++) {
-                String shipType = aiBoard[row][col];
-                if (shipType != null) {
-                    Image img = getImageForShip(shipType);
-                    if (img != null) {
-                        gc.drawImage(img, col * cellSize, row * cellSize, cellSize, cellSize);
+            placedShips.clear();
+            for (ShipComputerPlacementManager.ShipPlacement ship : computerShipsManager.getShips()) {
+                placedShips.add(new ShipUbication(ship.row, ship.column, ship.type, ship.size, ship.horizontal));
+                if (computerBoard[ship.row][ship.column].equals("~")) {
+                    for (int i = 0; i < ship.size; i++) {
+                        if (ship.horizontal) {
+                            computerBoard[ship.row][ship.column + i] = ship.type;
+                        } else {
+                            computerBoard[ship.row + i][ship.column] = ship.type;
+                        }
                     }
                 }
             }
         }
 
-        // Dibuja la cuadrícula
+        drawGrid();
+    }
+
+    private void initializeSettings() {
+        shipSizes.put("Submarino", 1);
+        shipSizes.put("Destructor", 2);
+        shipSizes.put("Crucero", 3);
+        shipSizes.put("Acorazado", 4);
+
+        shipLimits.put("Submarino", 4);
+        shipLimits.put("Destructor", 3);
+        shipLimits.put("Crucero", 2);
+        shipLimits.put("Acorazado", 1);
+    }
+
+    private void initializeBoard() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                computerBoard[i][j] = "~";
+            }
+        }
+    }
+
+    private void putShipsIA() {
+        Random random = new Random();
+        Map<String, Integer> placedByType = new HashMap<>();
+        for (String type : shipLimits.keySet()) {
+            placedByType.put(type, 0);
+        }
+
+        for (String type : shipLimits.keySet()) {
+            int max = shipLimits.get(type);
+            int size = shipSizes.get(type);
+
+            while (placedByType.get(type) < max) {
+                int row = random.nextInt(10);
+                int column = random.nextInt(10);
+                boolean horizontal = random.nextBoolean();
+
+                if (canPutShips(row, column, size, horizontal)) {
+                    putShip(row, column, type, size, horizontal);
+                    placedByType.put(type, placedByType.get(type) + 1);
+                }
+            }
+        }
+    }
+
+    private boolean canPutShips(int row, int column, int size, boolean horizontal) {
+        if (horizontal) {
+            if (column + size > 10) return false;
+            for (int i = 0; i < size; i++) {
+                if (!computerBoard[row][column + i].equals("~")) return false;
+            }
+        } else {
+            if (row + size > 10) return false;
+            for (int i = 0; i < size; i++) {
+                if (!computerBoard[row + i][column].equals("~")) return false;
+            }
+        }
+        return true;
+    }
+
+    private void putShip(int row, int column, String type, int size, boolean horizontal) {
+        if (horizontal) {
+            for (int i = 0; i < size; i++) {
+                computerBoard[row][column + i] = type;
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                computerBoard[row + i][column] = type;
+            }
+        }
+
+        placedShips.add(new ShipUbication(row, column, type, size, horizontal));
+        ShipComputerPlacementManager.ShipPlacement ship = new ShipComputerPlacementManager.ShipPlacement(row, column, type, size, horizontal);
+        computerShipsManager.addShipsComputer(ship);
+    }
+
+    private void drawGrid() {
+        if (canvasComputer == null) return;
+
+        GraphicsContext gc = canvasComputer.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvasComputer.getWidth(), canvasComputer.getHeight());
+
+        for (ShipUbication ship : placedShips) {
+            Image img = getImageForShip(ship.type);
+            if (img != null) {
+                if (ship.horizontal) {
+                    gc.drawImage(img, ship.column * cellSize, ship.row * cellSize, ship.size * cellSize, cellSize);
+                } else {
+                    gc.save();
+                    gc.translate((ship.column + 1) * cellSize, ship.row * cellSize);
+                    gc.rotate(90);
+                    gc.drawImage(img, 0, 0, ship.size * cellSize, cellSize);
+                    gc.restore();
+                }
+            } else {
+                gc.setFill(Color.GRAY);
+                if (ship.horizontal) {
+                    gc.fillRect(ship.column * cellSize, ship.row * cellSize, ship.size * cellSize, cellSize);
+                } else {
+                    gc.fillRect(ship.column * cellSize, ship.row * cellSize, cellSize, ship.size * cellSize);
+                }
+            }
+        }
+
         gc.setStroke(Color.BLACK);
         for (int i = 0; i <= 10; i++) {
             gc.strokeLine(i * cellSize, 0, i * cellSize, cellSize * 10);
@@ -149,9 +190,8 @@ public class AIEasyBoardController implements Initializable {
         }
     }
 
-    // Método que obtiene la imagen del barco según el tipo
     private Image getImageForShip(String type) {
-        String imagePath = "/Images/"; // Asegúrate de que las imágenes están en este directorio
+        String imagePath = "/Images/";
         switch (type) {
             case "Destructor":
                 return new Image(getClass().getResourceAsStream(imagePath + "destructor.jpg"));
@@ -166,12 +206,15 @@ public class AIEasyBoardController implements Initializable {
         }
     }
 
-    @FXML
-    public void switchToPlayerOneBoard(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/playeroneeasyboard.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToPlayerOneBoard(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Boards/playeroneeasyboard.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
