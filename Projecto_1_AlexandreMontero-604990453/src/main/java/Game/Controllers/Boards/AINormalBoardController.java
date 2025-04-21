@@ -24,7 +24,7 @@ public class AINormalBoardController implements Initializable {
 
     private final ShipComputerPlacementManager computerShipsManager = ShipComputerPlacementManager.getInstance();
     private final int cellSize = 40;
-    private final String[][] computerBoard = new String[15][15]; // Board size increased to 15x15
+    private final String[][] computerBoard = new String[12][12];
     private final List<ShipUbication> placedShips = new ArrayList<>();
     private final Map<String, Integer> shipSizes = new HashMap<>();
     private final Map<String, Integer> shipLimits = new HashMap<>();
@@ -86,16 +86,15 @@ public class AINormalBoardController implements Initializable {
         shipSizes.put("Crucero", 3);
         shipSizes.put("Acorazado", 4);
 
-        // Adjusted ship limits for Normal difficulty
-        shipLimits.put("Submarino", 3); // 3 Submarines
-        shipLimits.put("Destructor", 2); // 2 Destroyers
-        shipLimits.put("Crucero", 2); // 2 Cruisers
-        shipLimits.put("Acorazado", 1); // 1 Battleship (always remains)
+        shipLimits.put("Submarino", 4);
+        shipLimits.put("Destructor", 3);
+        shipLimits.put("Crucero", 2);
+        shipLimits.put("Acorazado", 1);
     }
 
     private void initializeBoard() {
-        for (int i = 0; i < 15; i++) { // Board size now 15x15
-            for (int j = 0; j < 15; j++) {
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
                 computerBoard[i][j] = "~";
             }
         }
@@ -113,8 +112,8 @@ public class AINormalBoardController implements Initializable {
             int size = shipSizes.get(type);
 
             while (placedByType.get(type) < max) {
-                int row = random.nextInt(15);  // Adjusted for 15x15 board
-                int column = random.nextInt(15); // Adjusted for 15x15 board
+                int row = random.nextInt(12);
+                int column = random.nextInt(12);
                 boolean horizontal = random.nextBoolean();
 
                 if (canPutShips(row, column, size, horizontal)) {
@@ -127,12 +126,12 @@ public class AINormalBoardController implements Initializable {
 
     private boolean canPutShips(int row, int column, int size, boolean horizontal) {
         if (horizontal) {
-            if (column + size > 15) return false; // Adjusted for 15x15 board
+            if (column + size > 12) return false;
             for (int i = 0; i < size; i++) {
                 if (!computerBoard[row][column + i].equals("~")) return false;
             }
         } else {
-            if (row + size > 15) return false; // Adjusted for 15x15 board
+            if (row + size > 12) return false;
             for (int i = 0; i < size; i++) {
                 if (!computerBoard[row + i][column].equals("~")) return false;
             }
@@ -168,7 +167,11 @@ public class AINormalBoardController implements Initializable {
                 if (ship.horizontal) {
                     gc.drawImage(img, ship.column * cellSize, ship.row * cellSize, ship.size * cellSize, cellSize);
                 } else {
-                    gc.drawImage(img, ship.column * cellSize, ship.row * cellSize, cellSize, ship.size * cellSize);
+                    gc.save();
+                    gc.translate((ship.column + 1) * cellSize, ship.row * cellSize);
+                    gc.rotate(90);
+                    gc.drawImage(img, 0, 0, ship.size * cellSize, cellSize);
+                    gc.restore();
                 }
             } else {
                 gc.setFill(Color.GRAY);
@@ -181,9 +184,9 @@ public class AINormalBoardController implements Initializable {
         }
 
         gc.setStroke(Color.BLACK);
-        for (int i = 0; i <= 15; i++) { // Adjusted for 15x15 board
-            gc.strokeLine(i * cellSize, 0, i * cellSize, cellSize * 15);
-            gc.strokeLine(0, i * cellSize, cellSize * 15, i * cellSize);
+        for (int i = 0; i <= 12; i++) {
+            gc.strokeLine(i * cellSize, 0, i * cellSize, cellSize * 12);
+            gc.strokeLine(0, i * cellSize, cellSize * 12, i * cellSize);
         }
     }
 
@@ -205,7 +208,7 @@ public class AINormalBoardController implements Initializable {
 
     public void switchToPlayerOneBoard(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Boards/playeroneeasyboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Boards/playeronenormalboard.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

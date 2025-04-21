@@ -6,29 +6,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="487.0" prefWidth="702.0" style="-fx-background-color: white;" stylesheets="@../../Styles/Boards/ainormalboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.AINormalBoardController">
-    <children>
-        <Canvas fx:id="canvasComputer" height="400" width="400" />
-        <ImageView fx:id="BtnShipDestruyer" fitHeight="119.0" fitWidth="108.0" layoutX="500.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../Images/destructor.jpg" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="BtnShipSubmarine" fitHeight="101.0" fitWidth="118.0" layoutX="500.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../Images/submarine.png" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="BtnShipCruise" fitHeight="108.0" fitWidth="108.0" layoutX="500.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../Images/cruser.jpg" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="BtnShipArmored" fitHeight="108.0" fitWidth="94.0" layoutX="502.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../Images/battleship.png" />
-            </image>
-        </ImageView>
-        <Text layoutX="75.0" layoutY="30.0" strokeWidth="0.0" text="Pantalla del Jugador" wrappingWidth="148.4722900390625" />
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="760.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.AINormalBoardController">
+   <children>
+      <Canvas fx:id="canvasComputer" height="480.0" layoutX="55.0" layoutY="30.0" width="480.0" />
+      <ImageView fx:id="BtnShipDestruyer" fitHeight="119.0" fitWidth="108.0" layoutX="593.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/destructor.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="BtnShipSubmarine" fitHeight="101.0" fitWidth="118.0" layoutX="588.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/submarine.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="BtnShipCruise" fitHeight="108.0" fitWidth="108.0" layoutX="593.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/cruser.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="BtnShipArmored" fitHeight="108.0" fitWidth="94.0" layoutX="588.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/battleship.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="55.0" layoutY="20.0" strokeWidth="0.0" text="Pantalla del Jugador" wrappingWidth="148.4722900390625" />
+   </children>
 </AnchorPane>

@@ -86,10 +86,10 @@ public class AIEasyBoardController implements Initializable {
         shipSizes.put("Crucero", 3);
         shipSizes.put("Acorazado", 4);
 
-        shipLimits.put("Submarino", 4);
-        shipLimits.put("Destructor", 3);
-        shipLimits.put("Crucero", 2);
-        shipLimits.put("Acorazado", 1);
+        shipLimits.put("Submarino", 5);
+        shipLimits.put("Destructor", 4);
+        shipLimits.put("Crucero", 3);
+        shipLimits.put("Acorazado", 2);
     }
 
     private void initializeBoard() {

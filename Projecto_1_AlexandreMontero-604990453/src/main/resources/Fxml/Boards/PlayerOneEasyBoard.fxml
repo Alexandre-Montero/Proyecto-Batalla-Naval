@@ -8,39 +8,48 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="487.0" prefWidth="702.0" style="-fx-background-color: white;" stylesheets="@../../Styles/Boards/playeroneeasyboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.PlayerOneEasyBoardController">
+<AnchorPane prefHeight="520.0" prefWidth="720.0" style="-fx-background-color: white;" stylesheets="@../../Styles/Boards/playeroneeasyboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.PlayerOneEasyBoardController">
     <children>
-        <Canvas fx:id="canvasPlayer" height="400.0" layoutX="23.0" layoutY="50.0" width="400.0" />
-        <ImageView fx:id="BtnShipDestruyer" fitHeight="119.0" fitWidth="108.0" layoutX="500.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+        <!-- Canvas para el tablero del jugador -->
+        <Canvas fx:id="canvasPlayer" height="400.0" layoutX="50.0" layoutY="50.0" width="400.0" />
+
+        <!-- Botones para seleccionar barcos -->
+        <ImageView fx:id="BtnShipDestruyer" fitHeight="119.0" fitWidth="108.0" layoutX="554.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../Images/destructor.jpg" />
             </image>
         </ImageView>
-        <ImageView fx:id="BtnShipSubmarine" fitHeight="101.0" fitWidth="118.0" layoutX="500.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="BtnShipSubmarine" fitHeight="101.0" fitWidth="118.0" layoutX="549.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../Images/submarine.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="BtnShipCruise" fitHeight="108.0" fitWidth="108.0" layoutX="500.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="BtnShipCruise" fitHeight="108.0" fitWidth="108.0" layoutX="549.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../Images/cruser.jpg" />
             </image>
         </ImageView>
-        <ImageView fx:id="BtnShipArmored" fitHeight="108.0" fitWidth="94.0" layoutX="502.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="BtnShipArmored" fitHeight="108.0" fitWidth="94.0" layoutX="556.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../Images/battleship.png" />
             </image>
         </ImageView>
-        <Text layoutX="75.0" layoutY="30.0" strokeWidth="0.0" text="Pantalla del Jugador" wrappingWidth="148.4722900390625" />
+
+        <!-- Título en la parte superior -->
+        <Text layoutX="50.0" layoutY="27.0" strokeWidth="0.0" text="Pantalla del Jugador" wrappingWidth="148.4722900390625" />
+
+        <!-- Botón para regresar al menú de dificultad -->
         <Button fx:id="btnReturnToDifficultyMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="471.0" mnemonicParsing="false" onAction="#switchToDifficultyMenu" stylesheets="@../../Styles/Boards/playeroneeasyboard.css" text="Regresar" textAlignment="CENTER">
             <font>
                 <Font name="Arial Black" size="14.0" />
             </font>
         </Button>
-      <Button fx:id="btnAIBoard" alignment="CENTER" contentDisplay="CENTER" layoutX="149.0" layoutY="471.0" mnemonicParsing="false" onAction="#switchToAIBoard" stylesheets="@../../Styles/Boards/playeroneeasyboard.css" text="Tablero AI" textAlignment="CENTER">
-         <font>
-            <Font name="Arial Black" size="14.0" />
-         </font>
-      </Button>
+
+        <!-- Botón para ir al tablero de la IA -->
+        <Button fx:id="btnAIBoard" alignment="CENTER" contentDisplay="CENTER" layoutX="149.0" layoutY="471.0" mnemonicParsing="false" onAction="#switchToAIEasyBoard" stylesheets="@../../Styles/Boards/playeroneeasyboard.css" text="Tablero AI" textAlignment="CENTER">
+            <font>
+                <Font name="Arial Black" size="14.0" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>

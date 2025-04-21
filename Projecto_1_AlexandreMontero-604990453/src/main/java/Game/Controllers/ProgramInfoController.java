@@ -1,6 +1,8 @@
 package Game.Controllers;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,16 +11,42 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ProgramInfoController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    @FXML
+    private Label lbGithubLink;
     @FXML
     private Label lbProgramInfo;
     @FXML
     private Button btnReturnToStartMenu;
+    @FXML
+    private Label lbStudent;
+    @FXML
+    private Label lbStudentName;
+    @FXML
+    private Label lbCarrer;
+    @FXML
+    private Label lbUniversity;
+    @FXML
+    private Label lbEmail;
+    @FXML
+    private Label lbCourse;
+    @FXML
+    private Label lbStudentUniversity;
+    @FXML
+    private Label lbStudentCareer;
+    @FXML
+    private Label lbStudentCourse;
+    @FXML
+    private Label lbStudentEmail;
+    @FXML
+    private Label lbGithub;
 
     @FXML
     public void switchToStartMenu(ActionEvent event) throws IOException {
@@ -27,5 +55,15 @@ public class ProgramInfoController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void openGithubLink(MouseEvent event) {
+        String url = "https://github.com/Alexandre-Montero/Proyecto-Batalla-Naval.git";
+        try {
+            java.awt.Desktop.getDesktop().browse(new URI(url));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 }

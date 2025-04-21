@@ -1,11 +1,5 @@
 package Game.Controllers.Boards;
 
-import Game.Classes.ShipPlacementManager;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,31 +13,22 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class PlayerOneEasyBoardController implements Initializable {
+import java.io.IOException;
+import java.net.URL;
+import java.util.*;
 
+public class PlayerOneEasyBoardController implements Initializable {
+    
     private Stage stage;
     private Scene scene;
     private Parent root;
-
+    
     @FXML
     private Canvas canvasPlayer;
-
-    private final int cellSize = 40;
-    private ShipPlacementManager shipManager = ShipPlacementManager.getInstance(); // Usar el singleton de ShipPlacementManager
-
-    private String[][] playerBoard = new String[10][10];
-    private Map<String, Integer> shipSizes = new HashMap<>();
-    private Map<String, Integer> shipLimits = new HashMap<>();
-    private Map<String, Integer> placedCount = new HashMap<>();
-
     @FXML
     private ImageView BtnShipDestruyer;
     @FXML
@@ -53,14 +38,34 @@ public class PlayerOneEasyBoardController implements Initializable {
     @FXML
     private ImageView BtnShipArmored;
     @FXML
+    private Button btnAIBoard;
+
+    private final int CELL_SIZE = 40;
+    private final String[][] playerBoard = new String[10][10];
+    private final Map<String, Integer> shipSizes = new HashMap<>();
+    private final Map<String, Integer> shipLimits = new HashMap<>();
+    private final Map<String, Integer> placedCount = new HashMap<>();
+    private final List<ShipPlacement> placedShips = new ArrayList<>();
+    @FXML
     private Button btnReturnToDifficultyMenu;
+
+    private static class ShipPlacement {
+
+        int row, col, size;
+        String type;
+
+        ShipPlacement(int row, int col, String type, int size) {
+            this.row = row;
+            this.col = col;
+            this.type = type;
+            this.size = size;
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                playerBoard[i][j] = "~";
-            }
+            Arrays.fill(playerBoard[i], "~");
         }
 
         shipSizes.put("Submarino", 1);
@@ -73,43 +78,32 @@ public class PlayerOneEasyBoardController implements Initializable {
         shipLimits.put("Destructor", 3);
         shipLimits.put("Acorazado", 2);
 
-        placedCount.put("Submarino", 0);
-        placedCount.put("Crucero", 0);
-        placedCount.put("Destructor", 0);
-        placedCount.put("Acorazado", 0);
+        shipLimits.keySet().forEach(type -> placedCount.put(type, 0));
 
-        BtnShipDestruyer.setOnDragDetected((MouseEvent event) -> {
-            startDrag(event, "Destructor", BtnShipDestruyer);
-        });
-        BtnShipSubmarine.setOnDragDetected((MouseEvent event) -> {
-            startDrag(event, "Submarino", BtnShipSubmarine);
-        });
-        BtnShipCruise.setOnDragDetected((MouseEvent event) -> {
-            startDrag(event, "Crucero", BtnShipCruise);
-        });
-        BtnShipArmored.setOnDragDetected((MouseEvent event) -> {
-            startDrag(event, "Acorazado", BtnShipArmored);
-        });
+        BtnShipDestruyer.setOnDragDetected(e -> startDrag(e, "Destructor", BtnShipDestruyer));
+        BtnShipSubmarine.setOnDragDetected(e -> startDrag(e, "Submarino", BtnShipSubmarine));
+        BtnShipCruise.setOnDragDetected(e -> startDrag(e, "Crucero", BtnShipCruise));
+        BtnShipArmored.setOnDragDetected(e -> startDrag(e, "Acorazado", BtnShipArmored));
 
-        canvasPlayer.setOnDragOver((DragEvent event) -> {
+        canvasPlayer.setOnDragOver(event -> {
             if (event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.COPY);
             }
             event.consume();
         });
-        canvasPlayer.setOnDragDropped((DragEvent event) -> {
+
+        canvasPlayer.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
             if (db.hasString()) {
                 String type = db.getString();
                 int size = shipSizes.get(type);
-                int col = (int) (event.getX() / cellSize);
-                int row = (int) (event.getY() / cellSize);
+                int col = (int) (event.getX() / CELL_SIZE);
+                int row = (int) (event.getY() / CELL_SIZE);
 
                 if (placedCount.get(type) >= shipLimits.get(type)) {
                     showAlert("Ya colocaste el límite de " + type);
                 } else if (canPlaceShip(row, col, size)) {
-                    // Coloca el barco en el tablero y en el ShipPlacementManager
                     placeShip(row, col, type, size);
                     success = true;
                 }
@@ -121,19 +115,6 @@ public class PlayerOneEasyBoardController implements Initializable {
         drawGrid();
     }
 
-    private class ShipPlacement {
-
-        int row, column, size;
-        String type;
-
-        ShipPlacement(int row, int column, String type, int size) {
-            this.row = row;
-            this.column = column;
-            this.type = type;
-            this.size = size;
-        }
-    }
-
     private void startDrag(MouseEvent event, String shipType, ImageView imageView) {
         Dragboard db = imageView.startDragAndDrop(TransferMode.COPY);
         ClipboardContent content = new ClipboardContent();
@@ -143,16 +124,11 @@ public class PlayerOneEasyBoardController implements Initializable {
         event.consume();
     }
 
-    private boolean canPlaceShip(int row, int column, int size) {
-        if (row < 0 || row >= 10 || column < 0 || column >= 10) {
+    private boolean canPlaceShip(int row, int col, int size) {
+        if (row < 0 || row >= 10 || col < 0 || col + size > 10) {
             return false;
         }
-
-        if (column + size > 10) {
-            return false;
-        }
-
-        for (int j = column; j < column + size; j++) {
+        for (int j = col; j < col + size; j++) {
             if (!playerBoard[row][j].equals("~")) {
                 return false;
             }
@@ -160,16 +136,12 @@ public class PlayerOneEasyBoardController implements Initializable {
         return true;
     }
 
-    private void placeShip(int row, int column, String type, int size) {
-        for (int j = column; j < column + size; j++) {
+    private void placeShip(int row, int col, String type, int size) {
+        for (int j = col; j < col + size; j++) {
             playerBoard[row][j] = type;
         }
-
-        // Añadir al ShipPlacementManager
-        shipManager.addShipPlacement(row, column, type, size);
-
+        placedShips.add(new ShipPlacement(row, col, type, size));
         placedCount.put(type, placedCount.get(type) + 1);
-
         drawGrid();
     }
 
@@ -177,36 +149,51 @@ public class PlayerOneEasyBoardController implements Initializable {
         GraphicsContext gc = canvasPlayer.getGraphicsContext2D();
         gc.clearRect(0, 0, canvasPlayer.getWidth(), canvasPlayer.getHeight());
 
-        // Dibuja todos los barcos colocados
-        for (Game.Classes.ShipPlacementManager.ShipPlacement sp : shipManager.getPlacedShips()) {
+        for (ShipPlacement sp : placedShips) {
             Image img = getImageForShip(sp.type);
             if (img != null) {
-                gc.drawImage(img, sp.column * cellSize, sp.row * cellSize, sp.size * cellSize, cellSize);
+                gc.drawImage(img, sp.col * CELL_SIZE, sp.row * CELL_SIZE, sp.size * CELL_SIZE, CELL_SIZE);
             }
         }
 
-        // Dibuja la cuadrícula
         gc.setStroke(Color.BLACK);
         for (int i = 0; i <= 10; i++) {
-            gc.strokeLine(i * cellSize, 0, i * cellSize, cellSize * 10);
-            gc.strokeLine(0, i * cellSize, cellSize * 10, i * cellSize);
+            gc.strokeLine(i * CELL_SIZE, 0, i * CELL_SIZE, CELL_SIZE * 10);
+            gc.strokeLine(0, i * CELL_SIZE, CELL_SIZE * 10, i * CELL_SIZE);
         }
     }
 
     private Image getImageForShip(String type) {
-        String imagePath = "/Images/";
+        String path = "/Images/";
         switch (type) {
             case "Destructor":
-                return new Image(getClass().getResourceAsStream(imagePath + "destructor.jpg"));
+                return new Image(getClass().getResourceAsStream(path + "destructor.jpg"));
             case "Submarino":
-                return new Image(getClass().getResourceAsStream(imagePath + "submarine.png"));
+                return new Image(getClass().getResourceAsStream(path + "submarine.png"));
             case "Crucero":
-                return new Image(getClass().getResourceAsStream(imagePath + "cruser.jpg"));
+                return new Image(getClass().getResourceAsStream(path + "cruser.jpg"));
             case "Acorazado":
-                return new Image(getClass().getResourceAsStream(imagePath + "battleship.png"));
+                return new Image(getClass().getResourceAsStream(path + "battleship.png"));
             default:
                 return null;
         }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @FXML
+    public void switchToAIEasyBoard(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/aieasyboard.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -216,21 +203,5 @@ public class PlayerOneEasyBoardController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    public void switchToAIBoard(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/aieasyboard.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Información");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }
