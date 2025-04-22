@@ -11,7 +11,7 @@
         <URL value="@/Styles/programinfo.css" />
     </stylesheets>
    <children>
-      <Label fx:id="lbProgramInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="270.0" layoutY="20.0" prefHeight="30.0" prefWidth="260.0" text="Información del Programa" textAlignment="CENTER">
+      <Label fx:id="lbProgramInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="270.0" layoutY="7.0" prefHeight="30.0" prefWidth="260.0" text="Información del Programa" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="18.0" />
          </font>
@@ -21,72 +21,72 @@
             <Font name="Arial Black" size="16.0" />
          </font>
       </Button>
-      <Label id="label" fx:id="lbStudent" contentDisplay="CENTER" layoutX="45.0" layoutY="65.0" stylesheets="@../Styles/programinfo.css" text="Estudiante:" textAlignment="CENTER">
+      <Label id="label" fx:id="lbStudent" contentDisplay="CENTER" layoutX="112.0" layoutY="65.0" stylesheets="@../Styles/programinfo.css" text="Estudiante:" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbStudentName" contentDisplay="CENTER" layoutX="141.0" layoutY="65.0" stylesheets="@../Styles/programinfo.css" text="Alexandre Eduardo Montero Espinosa" textAlignment="CENTER">
+      <Label id="label" fx:id="lbStudentName" contentDisplay="CENTER" layoutX="201.0" layoutY="65.0" stylesheets="@../Styles/programinfo.css" text="Alexandre Eduardo Montero Espinosa" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbCarrer" contentDisplay="CENTER" layoutX="45.0" layoutY="125.0" stylesheets="@../Styles/programinfo.css" text="Carrera: " textAlignment="CENTER">
+      <Label id="label" fx:id="lbCarrer" contentDisplay="CENTER" layoutX="108.0" layoutY="125.0" stylesheets="@../Styles/programinfo.css" text="Carrera: " textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbUniversity" layoutX="45.0" layoutY="95.0" stylesheets="@../Styles/programinfo.css" text="Universidad:" textAlignment="CENTER">
+      <Label id="label" fx:id="lbUniversity" layoutX="108.0" layoutY="95.0" stylesheets="@../Styles/programinfo.css" text="Universidad:" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbEmail" contentDisplay="CENTER" layoutX="45.0" layoutY="190.0" stylesheets="@../Styles/programinfo.css" text="Correo Electronico:" textAlignment="CENTER">
+      <Label id="label" fx:id="lbEmail" contentDisplay="CENTER" layoutX="108.0" layoutY="190.0" stylesheets="@../Styles/programinfo.css" text="Correo Electronico:" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbCourse" contentDisplay="CENTER" layoutX="45.0" layoutY="158.0" stylesheets="@../Styles/programinfo.css" text="Curso:" textAlignment="CENTER">
+      <Label id="label" fx:id="lbCourse" contentDisplay="CENTER" layoutX="108.0" layoutY="158.0" stylesheets="@../Styles/programinfo.css" text="Curso:" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbStudentUniversity" alignment="CENTER" contentDisplay="CENTER" layoutX="149.0" layoutY="95.0" stylesheets="@../Styles/programinfo.css" text="Universidad Nacional" textAlignment="CENTER">
+      <Label id="label" fx:id="lbStudentUniversity" alignment="CENTER" contentDisplay="CENTER" layoutX="209.0" layoutY="95.0" stylesheets="@../Styles/programinfo.css" text="Universidad Nacional" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbStudentCareer" contentDisplay="CENTER" layoutX="113.0" layoutY="125.0" stylesheets="@../Styles/programinfo.css" text="Ingeniería en Sistemas de Información" textAlignment="CENTER">
+      <Label id="label" fx:id="lbStudentCareer" contentDisplay="CENTER" layoutX="175.0" layoutY="125.0" stylesheets="@../Styles/programinfo.css" text="Ingeniería en Sistemas de Información" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbStudentCourse" contentDisplay="CENTER" layoutX="101.0" layoutY="158.0" stylesheets="@../Styles/programinfo.css" text="Programación II" textAlignment="CENTER">
+      <Label id="label" fx:id="lbStudentCourse" contentDisplay="CENTER" layoutX="175.0" layoutY="158.0" stylesheets="@../Styles/programinfo.css" text="Programación II" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbStudentEmail" contentDisplay="CENTER" layoutX="201.0" layoutY="190.0" onMouseClicked="#openGmail" stylesheets="@../Styles/programinfo.css" text="alexandre.montero.espinosa@est.una.ac.cr" textAlignment="CENTER" textFill="#110095" underline="true">
+      <Label id="label" fx:id="lbStudentEmail" contentDisplay="CENTER" layoutX="271.0" layoutY="190.0" onMouseClicked="#openGmail" stylesheets="@../Styles/programinfo.css" text="alexandre.montero.espinosa@est.una.ac.cr" textAlignment="CENTER" textFill="#1601ff" underline="true">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbGithub" contentDisplay="CENTER" layoutX="45.0" layoutY="229.0" stylesheets="@../Styles/programinfo.css" text="Github:" textAlignment="CENTER">
+      <Label id="label" fx:id="lbGithub" contentDisplay="CENTER" layoutX="105.0" layoutY="229.0" stylesheets="@../Styles/programinfo.css" text="Github:" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbGithubLink" contentDisplay="CENTER" layoutX="104.0" layoutY="229.0" onMouseClicked="#openGithubLink" stylesheets="@../Styles/programinfo.css" text="https://github.com/Alexandre-Montero/Proyecto-Batalla-Naval.git" textAlignment="CENTER" textFill="#110095" underline="true">
+      <Label id="label" fx:id="lbGithubLink" contentDisplay="CENTER" layoutX="175.0" layoutY="229.0" onMouseClicked="#openGithubLink" stylesheets="@../Styles/programinfo.css" text="https://github.com/Alexandre-Montero/Proyecto-Batalla-Naval.git" textAlignment="CENTER" textFill="#1601ff" underline="true">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbCredits" contentDisplay="CENTER" layoutX="45.0" layoutY="265.0" stylesheets="@../Styles/programinfo.css" text="Creditos:" textAlignment="CENTER">
+      <Label id="label" fx:id="lbCredits" contentDisplay="CENTER" layoutX="107.0" layoutY="265.0" stylesheets="@../Styles/programinfo.css" text="Creditos:" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbCompanyName" contentDisplay="CENTER" layoutX="119.0" layoutY="265.0" stylesheets="@../Styles/programinfo.css" text="Milton Bradley Company / Hasbro" textAlignment="CENTER">
+      <Label id="label" fx:id="lbCompanyName" contentDisplay="CENTER" layoutX="182.0" layoutY="265.0" stylesheets="@../Styles/programinfo.css" text="Milton Bradley Company / Hasbro" textAlignment="CENTER" textFill="#7e7e7e">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>

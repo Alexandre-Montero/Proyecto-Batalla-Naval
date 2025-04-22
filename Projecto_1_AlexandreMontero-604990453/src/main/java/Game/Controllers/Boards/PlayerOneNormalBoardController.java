@@ -86,8 +86,8 @@ public class PlayerOneNormalBoardController implements Initializable {
         // Configurar límites de barcos
         shipLimits.put("Submarino", 4);
         shipLimits.put("Crucero", 3);
-        shipLimits.put("Destructor", 2);
-        shipLimits.put("Acorazado", 1);
+        shipLimits.put("Destructor", 3);
+        shipLimits.put("Acorazado", 2);
 
         // Inicializar contadores
         shipLimits.keySet().forEach(type -> placedCount.put(type, 0));

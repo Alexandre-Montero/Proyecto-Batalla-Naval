@@ -72,10 +72,6 @@ public class PlayerOneEasyBoardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Inicializar tablero
-        for (int i = 0; i < 10; i++) {
-            Arrays.fill(playerBoard[i], "~");
-        }
 
         // Configurar tamaños de barcos
         shipSizes.put("Submarino", 1);
@@ -88,6 +84,12 @@ public class PlayerOneEasyBoardController implements Initializable {
         shipLimits.put("Crucero", 4);
         shipLimits.put("Destructor", 3);
         shipLimits.put("Acorazado", 2);
+        
+        configureShipButtonSizes();
+        // Inicializar tablero
+        for (int i = 0; i < 10; i++) {
+            Arrays.fill(playerBoard[i], "~");
+        }
 
         // Inicializar contadores
         shipLimits.keySet().forEach(type -> placedCount.put(type, 0));
@@ -100,6 +102,29 @@ public class PlayerOneEasyBoardController implements Initializable {
         btnToggleOrientation.setOnAction(this::toggleOrientation);
 
         drawGrid();
+    }
+
+    private void configureShipButtonSizes() {
+        // Verificar que shipSizes esté inicializado
+        if (shipSizes == null || shipSizes.isEmpty()) {
+            throw new IllegalStateException("shipSizes no ha sido inicializado");
+        }
+
+        // Configurar tamaños fijos para los botones de barcos
+        setShipButtonSize(BtnShipDestruyer, "Destructor");
+        setShipButtonSize(BtnShipSubmarine, "Submarino");
+        setShipButtonSize(BtnShipCruise, "Crucero");
+        setShipButtonSize(BtnShipArmored, "Acorazado");
+    }
+    
+    private void setShipButtonSize(ImageView imageView, String shipType) {
+        Integer size = shipSizes.get(shipType);
+        if (size == null) {
+            throw new IllegalArgumentException("Tipo de barco no encontrado: " + shipType);
+        }
+        imageView.setFitWidth(CELL_SIZE * size);
+        imageView.setFitHeight(CELL_SIZE);
+        imageView.setPreserveRatio(true);
     }
 
     private void setupDragEvents() {
@@ -147,7 +172,15 @@ public class PlayerOneEasyBoardController implements Initializable {
         ClipboardContent content = new ClipboardContent();
         content.putString(shipType);
         db.setContent(content);
-        db.setDragView(imageView.getImage());
+
+        // Usar snapshot del ImageView ya configurado con el tamaño correcto
+        Image dragImage = imageView.snapshot(null, null);
+        db.setDragView(dragImage);
+
+        // Ajustar los offsets para centrar la imagen bajo el cursor
+        db.setDragViewOffsetX(event.getX() - (dragImage.getWidth() / 2));
+        db.setDragViewOffsetY(event.getY() - (dragImage.getHeight() / 2));
+
         event.consume();
     }
 

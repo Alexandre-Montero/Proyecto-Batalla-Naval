@@ -1,25 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane prefHeight="650.0" prefWidth="1340.0" stylesheets="@../../Styles/Boards/gameboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.GameBoardController">
-    <Label fx:id="lbPlayerOne" stylesheets="@../../Styles/Boards/gameboard.css" text="Player 1: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
-    <Label fx:id="lbPlayerTwo" stylesheets="@../../Styles/Boards/gameboard.css" text="Player 2: " GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <Label fx:id="lbDifficulty" text="Difficulty: " GridPane.rowIndex="2" />
-    <Canvas fx:id="playerCanvas" height="570.0" width="670.0" GridPane.rowIndex="3" />
-    <Canvas fx:id="computerCanvas" height="570.0" width="670.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+<GridPane prefHeight="700.0" prefWidth="1400.0" stylesheets="@../../Styles/Boards/gameboard.css"
+          xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="Game.Controllers.Boards.GameBoardController">
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="700.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="700.0"/>
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints minHeight="30.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="30.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="30.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="500.0" prefHeight="600.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="30.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+
+    <!-- Columna izquierda (Jugador) -->
+    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <Label fx:id="lbPlayerOne" style="-fx-font-weight: bold; -fx-font-size: 16;" text="Player 1: "/>
+        <Label fx:id="lblPlayerShots" style="-fx-font-size: 14;" text="Disparos restantes: "/>
+    </VBox>
+
+    <!-- Columna derecha (Computadora/Player 2) -->
+    <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Label fx:id="lbPlayerTwo" style="-fx-font-weight: bold; -fx-font-size: 16;" text="Player 2: "/>
+        <Label fx:id="lblComputerShots" style="-fx-font-size: 14;" text="Disparos restantes: "/>
+    </VBox>
+
+    <!-- Dificultad -->
+    <VBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+        <Label fx:id="lbDifficulty" style="-fx-font-weight: bold; -fx-font-size: 14;" text="Dificultad: "/>
+    </VBox>
+
+    <!-- Mensajes del juego -->
+    <VBox spacing="5" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+        <Label fx:id="lblShotsLeft" style="-fx-font-size: 14;" text="Total de disparos restantes"/>
+        <Label fx:id="lblGameMessage" style="-fx-font-size: 14; -fx-text-fill: red;" text="Resultado del juego"/>
+    </VBox>
+
+    <!-- Tableros -->
+    <Canvas fx:id="playerCanvas" height="570.0" width="670.0" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <Canvas fx:id="computerCanvas" height="570.0" width="670.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <!-- Botón -->
+    <Button fx:id="btnToggleShips" mnemonicParsing="false" onAction="#handleToggleEnemyShips"
+            text="Mostrar/Ocultar Barcos" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 </GridPane>

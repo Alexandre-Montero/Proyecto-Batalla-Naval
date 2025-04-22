@@ -47,6 +47,8 @@ public class ModeMenuController {
     private Label lbPlayerTwoUsername;
     @FXML
     private Label lbWarningPlayerOneObligatory;
+    @FXML
+    private Label lbNoServices;
 
     public void initialize() {
         String playerOne = GameState.getInstance().getPlayerOne();
@@ -84,7 +86,6 @@ public class ModeMenuController {
         
         GameState.getInstance().setPvP(true);
 
-        loadNextScene("/Fxml/difficultymenu.fxml", event);
     }
 
     @FXML

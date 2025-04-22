@@ -15,28 +15,28 @@
         <URL value="@/Styles/Boards/playeronenormalboard.css" />
     </stylesheets>
     <children>
-        <Canvas fx:id="canvasPlayer" height="480.0" layoutX="55.0" layoutY="30.0" width="480.0" />
-        <ImageView fx:id="BtnShipDestruyer" fitHeight="119.0" fitWidth="108.0" layoutX="593.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+        <Canvas fx:id="canvasPlayer" height="480.0" layoutX="55.0" layoutY="25.0" width="480.0" />
+        <ImageView fx:id="BtnShipDestruyer" fitHeight="120.0" fitWidth="110.0" layoutX="590.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../Images/destructor.jpg" />
             </image>
         </ImageView>
-        <ImageView fx:id="BtnShipSubmarine" fitHeight="101.0" fitWidth="118.0" layoutX="588.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="BtnShipSubmarine" fitHeight="100.0" fitWidth="120.0" layoutX="588.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../Images/submarine.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="BtnShipCruise" fitHeight="108.0" fitWidth="108.0" layoutX="593.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="BtnShipCruise" fitHeight="110.0" fitWidth="110.0" layoutX="585.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../Images/cruser.jpg" />
             </image>
         </ImageView>
-        <ImageView fx:id="BtnShipArmored" fitHeight="108.0" fitWidth="94.0" layoutX="588.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="BtnShipArmored" fitWidth="100.0" layoutX="590.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../Images/battleship.png" />
             </image>
         </ImageView>
-        <Text layoutX="55.0" layoutY="20.0" strokeWidth="0.0" text="Pantalla del Jugador" wrappingWidth="148.4722900390625" />
+        <Text fx:id="lbPlayerView" layoutX="55.0" layoutY="20.0" strokeWidth="0.0" text="Pantalla del Jugador" wrappingWidth="148.4722900390625" />
         <Button fx:id="btnReturnToDifficultyMenu" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="521.0" mnemonicParsing="false" onAction="#switchToDifficultyMenu" stylesheets="@../../Styles/Boards/playeroneeasyboard.css" text="Regresar" textAlignment="CENTER">
             <font>
                 <Font name="Arial Black" size="14.0" />
@@ -47,6 +47,10 @@
                 <Font name="Arial Black" size="14.0" />
             </font>
         </Button>
-        <ToggleButton fx:id="btnToggleOrientation" layoutX="240.0" layoutY="524.0" mnemonicParsing="false" onAction="#toggleOrientation" text="Orientación: Horizontal" />
+        <ToggleButton fx:id="btnToggleOrientation" contentDisplay="CENTER" layoutX="254.0" layoutY="521.0" mnemonicParsing="false" onAction="#toggleOrientation" stylesheets="@../../Styles/Boards/playeronenormalboard.css" text="Orientación: Horizontal" textAlignment="CENTER" />
+      <Text fx:id="lbSubmarineName" layoutX="588.0" layoutY="38.0" strokeWidth="0.0" text=" Submarinos ( Max: 4)" wrappingWidth="148.4722900390625" />
+      <Text fx:id="lbDestructorName" layoutX="590.0" layoutY="125.0" strokeWidth="0.0" text="Destructores ( Max: 3)" wrappingWidth="148.4722900390625" />
+      <Text fx:id="lbCruserName" layoutX="585.0" layoutY="278.0" strokeWidth="0.0" text="Cruceros ( Max: 3)" wrappingWidth="148.4722900390625" />
+      <Text fx:id="lbBattleshipName" layoutX="588.0" layoutY="411.0" strokeWidth="0.0" text="Acorazado ( Max: 2)" wrappingWidth="148.4722900390625" />
     </children>
 </AnchorPane>

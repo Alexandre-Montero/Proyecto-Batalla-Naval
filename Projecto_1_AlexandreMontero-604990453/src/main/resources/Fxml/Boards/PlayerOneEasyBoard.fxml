@@ -52,7 +52,6 @@
                 <Font name="Arial Black" size="14.0" />
             </font>
         </Button>
-      <ToggleButton fx:id="btnToggleOrientation" text="Orientación: Horizontal"
-                    layoutX="271.0" layoutY="475.0" mnemonicParsing="false" onAction="#toggleOrientation" />
+      <ToggleButton fx:id="btnToggleOrientation" layoutX="270.0" layoutY="470.0" mnemonicParsing="false" onAction="#toggleOrientation" text="Orientación: Horizontal" />
     </children>
 </AnchorPane>

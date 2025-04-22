@@ -1,40 +1,47 @@
 .mainFxmlClass {
-
+    -fx-background-image: url("/Images/modeMenuImage.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
 }
 
 #lbEnemySelectionTitle {
-   -fx-font-family: "Times New Roman";
+    -fx-font-family: "Times New Roman";
     -fx-font-size: 28;
-    -fx-font-weight: bold; 
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
 }
 
 #lbAddPlayers {
     -fx-font-family: "Times New Roman";
     -fx-font-size: 18;
+    -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
 }
 
 #lbPlayerOne {
     -fx-font-family: "Times New Roman";
     -fx-font-size: 18;
+    -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
 }
 
 #lbPlayerTwo {
     -fx-font-family: "Times New Roman";
     -fx-font-size: 18;
+    -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
 }
 
 #lbPlayerTwoOptional {
     -fx-font-family: "Times New Roman";
     -fx-font-size: 18;
+    -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
 }
 
 #txtPlayerOne {
     -fx-font-family: "Times New Roman";
-    -fx-font-size: 12;
+    -fx-font-size: 14;
     -fx-font-weight: bold;
     -fx-border-radius: 15;
     -fx-background-radius: 15;
@@ -44,7 +51,7 @@
 
 #txtPlayerTwo {
     -fx-font-family: "Times New Roman";
-    -fx-font-size: 12;
+    -fx-font-size: 14;
     -fx-font-weight: bold;
     -fx-border-radius: 15;
     -fx-background-radius: 15;
@@ -56,10 +63,12 @@
     -fx-font-family: "Times New Roman";
     -fx-font-size: 16;
     -fx-font-weight: bold;
-    -fx-border-radius: 15;
+    -fx-background-color: #F9B64D;
+    -fx-text-fill: #1F2C3C;
+    -fx-border-radius: 8;
     -fx-border-width: 2px;
     -fx-border-color: black;
-    -fx-background-radius: 15;
+    -fx-background-radius: 8;
     -fx-pref-height: 35px;
 }
 
@@ -67,5 +76,7 @@
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-cursor: hand;
+    -fx-background-color: #2D4A6A;
+    -fx-text-fill: #F8E5B1;
 }
 
