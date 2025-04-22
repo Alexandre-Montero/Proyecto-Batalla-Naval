@@ -5,7 +5,6 @@ import java.util.List;
 public class GamePlayManager {
     private static GamePlayManager instance;
 
-    // Enumeración de las dificultades
     public enum Difficulty {
         EASY,
         NORMAL,
@@ -54,18 +53,13 @@ public class GamePlayManager {
         }
     }
 
-    // Método para configurar el juego en función de la dificultad
     public void setupPvAI(String playerOne, Difficulty difficulty) {
-        // Lógica para configurar el juego según la dificultad
         switch (difficulty) {
             case EASY:
-                // Configuración para dificultad fácil
                 break;
             case NORMAL:
-                // Configuración para dificultad normal
                 break;
             case HARD:
-                // Configuración para dificultad difícil
                 break;
         }
     }

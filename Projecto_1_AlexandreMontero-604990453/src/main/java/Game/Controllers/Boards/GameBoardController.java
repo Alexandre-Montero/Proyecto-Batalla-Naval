@@ -14,24 +14,31 @@ import javafx.scene.text.Font;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.scene.control.Label;
 
 public class GameBoardController implements Initializable {
 
-    @FXML private Canvas playerCanvas;
-    @FXML private Canvas computerCanvas;
-    
+    @FXML
+    private Canvas playerCanvas;
+    @FXML
+    private Canvas computerCanvas;
+
     private final GamePlayManager gamePlayManager = GamePlayManager.getInstance();
-    private int cellSize = 40; // Tamaño fijo de celda
-    private int boardSize; // Tamaño del tablero (10, 12 o 15)
-    private int offsetX = 30; // Espacio para coordenadas
-    private int offsetY = 20; // Espacio para coordenadas
+    private int cellSize = 40;
+    private int boardSize;
+    private int offsetX = 30;
+    private int offsetY = 20;
+    @FXML
+    private Label lbPlayerOne;
+    @FXML
+    private Label lbPlayerTwo;
+    @FXML
+    private Label lbDifficulty;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Configurar tamaño del tablero según dificultad
         configureBoardSize();
-        
-        // Configurar tamaño de los Canvas
+
         playerCanvas.setWidth(boardSize * cellSize + offsetX);
         playerCanvas.setHeight(boardSize * cellSize + offsetY);
         computerCanvas.setWidth(boardSize * cellSize + offsetX);
@@ -46,31 +53,29 @@ public class GameBoardController implements Initializable {
 
     private void configureBoardSize() {
         String difficulty = gamePlayManager.getDifficulty();
-        if (difficulty == null) difficulty = "NORMAL"; // Valor por defecto
-        
+        if (difficulty == null) {
+            difficulty = "NORMAL";
+        }
+
         switch (difficulty.toUpperCase()) {
             case "EASY":
                 boardSize = 10;
                 break;
             case "HARD":
-                boardSize = 15;
+                boardSize = 14;
                 break;
-            default: // NORMAL
+            default:
                 boardSize = 12;
         }
     }
 
     private void initializePvPBoard() {
-        // Dibujar tableros para ambos jugadores
         drawPlayerBoard(playerCanvas, gamePlayManager.getPlayerOneName());
         drawPlayerBoard(computerCanvas, gamePlayManager.getPlayerTwoName());
     }
 
     private void initializePvAIBoard() {
-        // Dibujar tablero del jugador
         drawPlayerBoard(playerCanvas, gamePlayManager.getPlayerOneName());
-        
-        // Dibujar tablero de la IA
         drawComputerBoard();
     }
 
@@ -78,16 +83,23 @@ public class GameBoardController implements Initializable {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        // Dibujar cuadrícula
         drawGrid(gc);
-        
-        // Dibujar barcos del jugador
-        List<ShipPlacementManager.ShipPlacement> ships = gamePlayManager.getPlayerShips(playerId);
+
+        // Obtiene los barcos directamente del ShipPlacementManager
+        List<ShipPlacementManager.ShipPlacement> ships
+                = ShipPlacementManager.getInstance().getPlacedShips(playerId);
+
+        System.out.println("Dibujando barcos para: " + playerId);
+        System.out.println("Número de barcos: " + ships.size());
+
         for (ShipPlacementManager.ShipPlacement ship : ships) {
+            System.out.printf("Barco: %s en (%d,%d) tamaño %d %s%n",
+                    ship.type, ship.row, ship.column, ship.size,
+                    ship.horizontal ? "Horizontal" : "Vertical");
+
             drawShip(gc, ship.row, ship.column, ship.type, ship.size, ship.horizontal);
         }
-        
-        // Dibujar coordenadas
+
         drawCoordinates(gc);
     }
 
@@ -95,16 +107,15 @@ public class GameBoardController implements Initializable {
         GraphicsContext gc = computerCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, computerCanvas.getWidth(), computerCanvas.getHeight());
 
-        // Dibujar cuadrícula
         drawGrid(gc);
-        
-        // Dibujar barcos de la IA
+
         List<ShipComputerPlacementManager.ShipPlacement> computerShips = gamePlayManager.getComputerShips();
+        System.out.println("Dibujando barcos de la computadora. Cantidad: " + computerShips.size());
+
         for (ShipComputerPlacementManager.ShipPlacement ship : computerShips) {
             drawShip(gc, ship.row, ship.column, ship.type, ship.size, ship.horizontal);
         }
-        
-        // Dibujar coordenadas
+
         drawCoordinates(gc);
     }
 
@@ -112,35 +123,20 @@ public class GameBoardController implements Initializable {
         Image img = getImageForShip(type);
         if (img != null) {
             if (horizontal) {
-                gc.drawImage(img, 
-                    offsetX + col * cellSize, 
-                    offsetY + row * cellSize, 
-                    size * cellSize, 
-                    cellSize);
+                gc.drawImage(img, offsetX + col * cellSize, offsetY + row * cellSize, size * cellSize, cellSize);
             } else {
                 gc.save();
-                gc.translate(
-                    offsetX + (col + 1) * cellSize, 
-                    offsetY + row * cellSize);
+                gc.translate(offsetX + (col + 1) * cellSize, offsetY + row * cellSize);
                 gc.rotate(90);
                 gc.drawImage(img, 0, 0, size * cellSize, cellSize);
                 gc.restore();
             }
         } else {
-            // Dibujar barco genérico si no hay imagen
             gc.setFill(getShipColor(type));
             if (horizontal) {
-                gc.fillRect(
-                    offsetX + col * cellSize, 
-                    offsetY + row * cellSize, 
-                    size * cellSize, 
-                    cellSize);
+                gc.fillRect(offsetX + col * cellSize, offsetY + row * cellSize, size * cellSize, cellSize);
             } else {
-                gc.fillRect(
-                    offsetX + col * cellSize, 
-                    offsetY + row * cellSize, 
-                    cellSize, 
-                    size * cellSize);
+                gc.fillRect(offsetX + col * cellSize, offsetY + row * cellSize, cellSize, size * cellSize);
             }
         }
     }
@@ -148,54 +144,35 @@ public class GameBoardController implements Initializable {
     private void drawGrid(GraphicsContext gc) {
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(1);
-        
-        // Dibujar líneas verticales
+
         for (int i = 0; i <= boardSize; i++) {
-            gc.strokeLine(
-                offsetX + i * cellSize, 
-                offsetY, 
-                offsetX + i * cellSize, 
-                offsetY + boardSize * cellSize);
-        }
-        
-        // Dibujar líneas horizontales
-        for (int i = 0; i <= boardSize; i++) {
-            gc.strokeLine(
-                offsetX, 
-                offsetY + i * cellSize, 
-                offsetX + boardSize * cellSize, 
-                offsetY + i * cellSize);
+            gc.strokeLine(offsetX + i * cellSize, offsetY, offsetX + i * cellSize, offsetY + boardSize * cellSize);
+            gc.strokeLine(offsetX, offsetY + i * cellSize, offsetX + boardSize * cellSize, offsetY + i * cellSize);
         }
     }
 
     private void drawCoordinates(GraphicsContext gc) {
         gc.setFill(Color.BLACK);
         gc.setFont(Font.font(12));
-        
-        // Dibujar letras (columnas)
+
         for (int i = 0; i < boardSize; i++) {
-            gc.fillText(
-                String.valueOf((char)('A' + i)), 
-                offsetX + i * cellSize + cellSize/3, 
-                offsetY - 5);
-        }
-        
-        // Dibujar números (filas)
-        for (int i = 0; i < boardSize; i++) {
-            gc.fillText(
-                String.valueOf(i + 1), 
-                5, 
-                offsetY + i * cellSize + cellSize/2);
+            gc.fillText(String.valueOf((char) ('A' + i)), offsetX + i * cellSize + cellSize / 3, offsetY - 5);
+            gc.fillText(String.valueOf(i + 1), 5, offsetY + i * cellSize + cellSize / 2);
         }
     }
 
     private Color getShipColor(String type) {
         switch (type) {
-            case "Destructor": return Color.LIGHTGRAY;
-            case "Submarino": return Color.DARKGRAY;
-            case "Crucero": return Color.GRAY;
-            case "Acorazado": return Color.DARKSLATEGRAY;
-            default: return Color.BLUE;
+            case "Destructor":
+                return Color.LIGHTGRAY;
+            case "Submarino":
+                return Color.DARKGRAY;
+            case "Crucero":
+                return Color.GRAY;
+            case "Acorazado":
+                return Color.DARKSLATEGRAY;
+            default:
+                return Color.BLUE;
         }
     }
 

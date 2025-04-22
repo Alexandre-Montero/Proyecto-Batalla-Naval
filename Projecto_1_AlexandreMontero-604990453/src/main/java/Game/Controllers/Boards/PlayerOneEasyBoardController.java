@@ -1,5 +1,7 @@
 package Game.Controllers.Boards;
 
+import Game.Classes.GamePlayManager;
+import Game.Classes.ShipPlacementManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,19 +25,27 @@ import java.net.URL;
 import java.util.*;
 
 public class PlayerOneEasyBoardController implements Initializable {
-    
+
     private Stage stage;
     private Scene scene;
     private Parent root;
-    
-    @FXML private Canvas canvasPlayer;
-    @FXML private ImageView BtnShipDestruyer;
-    @FXML private ImageView BtnShipSubmarine;
-    @FXML private ImageView BtnShipCruise;
-    @FXML private ImageView BtnShipArmored;
-    @FXML private Button btnAIBoard;
-    @FXML private Button btnReturnToDifficultyMenu;
-    @FXML private ToggleButton btnToggleOrientation; // Botón para cambiar orientación
+
+    @FXML
+    private Canvas canvasPlayer;
+    @FXML
+    private ImageView BtnShipDestruyer;
+    @FXML
+    private ImageView BtnShipSubmarine;
+    @FXML
+    private ImageView BtnShipCruise;
+    @FXML
+    private ImageView BtnShipArmored;
+    @FXML
+    private Button btnAIBoard;
+    @FXML
+    private Button btnReturnToDifficultyMenu;
+    @FXML
+    private ToggleButton btnToggleOrientation; // Botón para cambiar orientación
 
     private final int CELL_SIZE = 40;
     private final String[][] playerBoard = new String[10][10];
@@ -46,6 +56,7 @@ public class PlayerOneEasyBoardController implements Initializable {
     private boolean isHorizontal = true; // Orientación por defecto (horizontal)
 
     private static class ShipPlacement {
+
         int row, col, size;
         String type;
         boolean horizontal;
@@ -83,7 +94,7 @@ public class PlayerOneEasyBoardController implements Initializable {
 
         // Configurar eventos de arrastre
         setupDragEvents();
-        
+
         // Configurar botón de orientación
         btnToggleOrientation.setText("Orientación: " + (isHorizontal ? "Horizontal" : "Vertical"));
         btnToggleOrientation.setOnAction(this::toggleOrientation);
@@ -163,7 +174,9 @@ public class PlayerOneEasyBoardController implements Initializable {
         return true;
     }
 
+    // En tu método placeShip del PlayerOneEasyBoardController
     private void placeShip(int row, int col, String type, int size, boolean horizontal) {
+        // Actualiza el tablero lógico
         if (horizontal) {
             for (int j = col; j < col + size; j++) {
                 playerBoard[row][j] = type;
@@ -173,6 +186,17 @@ public class PlayerOneEasyBoardController implements Initializable {
                 playerBoard[i][col] = type;
             }
         }
+
+        // Guarda el barco en el ShipPlacementManager
+        ShipPlacementManager.getInstance().addShipPlacement(
+                GamePlayManager.getInstance().getPlayerOneName(),
+                row,
+                col,
+                type,
+                size,
+                horizontal
+        );
+
         placedShips.add(new ShipPlacement(row, col, type, size, horizontal));
         placedCount.put(type, placedCount.get(type) + 1);
         drawGrid();
@@ -187,8 +211,8 @@ public class PlayerOneEasyBoardController implements Initializable {
             Image img = getImageForShip(sp.type);
             if (img != null) {
                 if (sp.horizontal) {
-                    gc.drawImage(img, sp.col * CELL_SIZE, sp.row * CELL_SIZE, 
-                                sp.size * CELL_SIZE, CELL_SIZE);
+                    gc.drawImage(img, sp.col * CELL_SIZE, sp.row * CELL_SIZE,
+                            sp.size * CELL_SIZE, CELL_SIZE);
                 } else {
                     gc.save();
                     gc.translate((sp.col + 1) * CELL_SIZE, sp.row * CELL_SIZE);
@@ -200,11 +224,11 @@ public class PlayerOneEasyBoardController implements Initializable {
                 // Dibujo alternativo si no hay imagen
                 gc.setFill(getShipColor(sp.type));
                 if (sp.horizontal) {
-                    gc.fillRect(sp.col * CELL_SIZE, sp.row * CELL_SIZE, 
-                              sp.size * CELL_SIZE, CELL_SIZE);
+                    gc.fillRect(sp.col * CELL_SIZE, sp.row * CELL_SIZE,
+                            sp.size * CELL_SIZE, CELL_SIZE);
                 } else {
-                    gc.fillRect(sp.col * CELL_SIZE, sp.row * CELL_SIZE, 
-                              CELL_SIZE, sp.size * CELL_SIZE);
+                    gc.fillRect(sp.col * CELL_SIZE, sp.row * CELL_SIZE,
+                            CELL_SIZE, sp.size * CELL_SIZE);
                 }
             }
         }
@@ -219,11 +243,16 @@ public class PlayerOneEasyBoardController implements Initializable {
 
     private Color getShipColor(String type) {
         switch (type) {
-            case "Destructor": return Color.LIGHTGRAY;
-            case "Submarino": return Color.DARKGRAY;
-            case "Crucero": return Color.GRAY;
-            case "Acorazado": return Color.DARKSLATEGRAY;
-            default: return Color.BLUE;
+            case "Destructor":
+                return Color.LIGHTGRAY;
+            case "Submarino":
+                return Color.DARKGRAY;
+            case "Crucero":
+                return Color.GRAY;
+            case "Acorazado":
+                return Color.DARKSLATEGRAY;
+            default:
+                return Color.BLUE;
         }
     }
 

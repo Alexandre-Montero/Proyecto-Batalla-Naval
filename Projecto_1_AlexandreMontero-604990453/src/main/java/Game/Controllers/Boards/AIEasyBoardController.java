@@ -1,6 +1,9 @@
 package Game.Controllers.Boards;
 
+import Game.Classes.GamePlayManager;
+import Game.Classes.GameState;
 import Game.Classes.ShipComputerPlacementManager;
+import Game.Classes.ShipPlacementManager;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,11 +24,11 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 public class AIEasyBoardController implements Initializable {
-    
+
     private Stage stage;
     private Scene scene;
     private Parent root;
-    
+
     @FXML
     private Canvas canvasComputer;
 
@@ -237,17 +240,19 @@ public class AIEasyBoardController implements Initializable {
         }
     }
 
+
     @FXML
-    public void switchToGameBoard (ActionEvent event) throws IOException {
+    public void switchToGameBoard(ActionEvent event) throws IOException {
+
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/gameboard.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    
+
     @FXML
-    public void switchToPlayerOneBoard (ActionEvent event) throws IOException {
+    public void switchToPlayerOneBoard(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/playeroneeasyboard.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

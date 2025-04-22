@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.GameBoardController">
-    <Label fx:id="lbPlayerOne" text="Player 1: " GridPane.rowIndex="0" GridPane.columnIndex="0" />
-    <Label fx:id="lbPlayerTwo" text="Player 2: " GridPane.rowIndex="1" GridPane.columnIndex="0" />
-    <Label fx:id="lbDifficulty" text="Difficulty: " GridPane.rowIndex="2" GridPane.columnIndex="0" />
-    <Canvas fx:id="playerCanvas" width="500" height="500" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-    <Canvas fx:id="computerCanvas" width="500" height="500" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+<GridPane prefHeight="650.0" prefWidth="1340.0" stylesheets="@../../Styles/Boards/gameboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.GameBoardController">
+    <Label fx:id="lbPlayerOne" stylesheets="@../../Styles/Boards/gameboard.css" text="Player 1: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <Label fx:id="lbPlayerTwo" stylesheets="@../../Styles/Boards/gameboard.css" text="Player 2: " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label fx:id="lbDifficulty" text="Difficulty: " GridPane.rowIndex="2" />
+    <Canvas fx:id="playerCanvas" height="570.0" width="670.0" GridPane.rowIndex="3" />
+    <Canvas fx:id="computerCanvas" height="570.0" width="670.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>

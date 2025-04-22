@@ -1,26 +1,35 @@
 .mainFxmlClass {
-
+    -fx-background-image: url("/Images/programInfoImage.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
 }
 
 .lb {
     -fx-font-family: "Times New Roman";
     -fx-font-size: 16;
     -fx-font-weight: bold;
+    -fx-text-fill: #0A3A60;
 }
 
 .button {
     -fx-font-family: "Times New Roman";
-    -fx-font-size: 16;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-border-radius: 15;
-    -fx-border-width: 2px;
-    -fx-border-color: black;
-    -fx-background-radius: 15;
-    -fx-pref-height: 35px;
+    -fx-text-fill: white;
+    -fx-background-color: #004C66;
+    -fx-border-color: #f2c94c;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-pref-height: 40px;
 }
 
 .button:hover {
+    -fx-background-color: #004C66;
+    -fx-text-fill: #f2c94c;
+    -fx-border-color: #f2c94c;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0.2, 0, 2);
 }

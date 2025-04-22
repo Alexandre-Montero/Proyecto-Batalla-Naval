@@ -1,11 +1,11 @@
 .mainFxmlClass {
-    -fx-background-image: url("/Images/startmenu.jpg");
+    -fx-background-image: url("/Images/startMenuImage.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
 }
 
 .button {
-    -fx-font-family: "Arial";
+    -fx-font-family: "Times New Roman";
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: white;

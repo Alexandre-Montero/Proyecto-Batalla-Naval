@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -30,5 +31,6 @@
             </image>
         </ImageView>
         <Text layoutX="30.0" layoutY="36.0" strokeWidth="0.0" text="Pantalla de la AI" wrappingWidth="148.4722900390625" />
+      <Button fx:id="btnPlay" contentDisplay="CENTER" layoutX="104.0" layoutY="610.0" mnemonicParsing="false" onAction="#switchToGameBoard" text="Empezar" textAlignment="CENTER" />
     </children>
 </AnchorPane>

@@ -35,8 +35,6 @@ public class ShipPlacementManager {
         playerShips.remove(playerId);
     }
 
-    // NUEVOS MÉTODOS NECESARIOS
-
     public List<ShipPlacement> getPlacedShipsForPlayer(String playerId) {
         return getPlacedShips(playerId);
     }
@@ -53,11 +51,10 @@ public class ShipPlacementManager {
         playerShips.put(playerId, ships);
     }
 
-    // Clase interna para representar un barco colocado
     public static class ShipPlacement {
         public int row, column, size;
         public String type;
-        public boolean horizontal;  // Cambiado de isVertical a horizontal
+        public boolean horizontal;
 
         public ShipPlacement(int row, int column, String type, int size, boolean horizontal) {
             this.row = row;
@@ -67,7 +64,6 @@ public class ShipPlacementManager {
             this.horizontal = horizontal;
         }
 
-        // Modificación de equals y hashCode para tener en cuenta el campo horizontal
         @Override
         public boolean equals(Object obj) {
             if (this == obj) return true;
