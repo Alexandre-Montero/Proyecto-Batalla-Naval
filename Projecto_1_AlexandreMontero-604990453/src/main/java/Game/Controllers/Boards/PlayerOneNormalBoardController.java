@@ -49,6 +49,11 @@ public class PlayerOneNormalBoardController implements Initializable {
     @FXML
     private Button btnReturnToDifficultyMenu;
 
+    @FXML
+    private void switchToAIHardBoard(ActionEvent event) {
+    }
+
+
     private static class ShipPlacement {
 
         int row, col, size;
@@ -187,7 +192,6 @@ public class PlayerOneNormalBoardController implements Initializable {
         alert.showAndWait();
     }
 
-    @FXML
     public void switchToAINormalBoard(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/ainormalboard.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

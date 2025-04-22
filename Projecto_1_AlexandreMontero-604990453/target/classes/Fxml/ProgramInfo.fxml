@@ -66,7 +66,7 @@
             <Font name="Arial Black" size="14.0" />
          </font>
       </Label>
-      <Label id="label" fx:id="lbStudentEmail" contentDisplay="CENTER" layoutX="201.0" layoutY="190.0" stylesheets="@../Styles/programinfo.css" text="alexandre.montero.espinosa@est.una.ac.cr" textAlignment="CENTER">
+      <Label id="label" fx:id="lbStudentEmail" contentDisplay="CENTER" layoutX="201.0" layoutY="190.0" onMouseClicked="#openGmail" stylesheets="@../Styles/programinfo.css" text="alexandre.montero.espinosa@est.una.ac.cr" textAlignment="CENTER" textFill="#110095" underline="true">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
@@ -77,6 +77,16 @@
          </font>
       </Label>
       <Label id="label" fx:id="lbGithubLink" contentDisplay="CENTER" layoutX="104.0" layoutY="229.0" onMouseClicked="#openGithubLink" stylesheets="@../Styles/programinfo.css" text="https://github.com/Alexandre-Montero/Proyecto-Batalla-Naval.git" textAlignment="CENTER" textFill="#110095" underline="true">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Label>
+      <Label id="label" fx:id="lbCredits" contentDisplay="CENTER" layoutX="45.0" layoutY="265.0" stylesheets="@../Styles/programinfo.css" text="Creditos:" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Label>
+      <Label id="label" fx:id="lbCompanyName" contentDisplay="CENTER" layoutX="119.0" layoutY="265.0" stylesheets="@../Styles/programinfo.css" text="Milton Bradley Company / Hasbro" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>

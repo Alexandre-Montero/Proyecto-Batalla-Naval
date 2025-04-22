@@ -2,7 +2,57 @@
 
 }
 
-.button{
+#lbEnemySelectionTitle {
+   -fx-font-family: "Times New Roman";
+    -fx-font-size: 28;
+    -fx-font-weight: bold; 
+}
+
+#lbAddPlayers {
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+#lbPlayerOne {
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+#lbPlayerTwo {
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+#lbPlayerTwoOptional {
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+#txtPlayerOne {
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+#txtPlayerTwo {
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+.button {
     -fx-font-family: "Times New Roman";
     -fx-font-size: 16;
     -fx-font-weight: bold;
@@ -12,3 +62,10 @@
     -fx-background-radius: 15;
     -fx-pref-height: 35px;
 }
+
+.button:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-cursor: hand;
+}
+

@@ -1,61 +1,27 @@
 .mainFxmlClass {
-    
+    -fx-background-image: url("/Images/startmenu.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
 }
 
-#lbGameName {
-    -fx-font-family: "Times New Roman";
-    -fx-font-size: 28;
+.button {
+    -fx-font-family: "Arial";
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: #0a1d2d;
+    -fx-border-color: #b0b7be;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-pref-height: 40px;
 }
 
-#lbAddPlayers {
-    -fx-font-family: "Times New Roman";
-    -fx-font-size: 18;
-    -fx-font-weight: bold;
-}
-
-#lbPlayerOne {
-    -fx-font-family: "Times New Roman";
-    -fx-font-size: 18;
-    -fx-font-weight: bold;
-}
-
-#lbPlayerTwo {
-    -fx-font-family: "Times New Roman";
-    -fx-font-size: 18;
-    -fx-font-weight: bold;
-}
-
-#lbPlayerTwoOptional {
-    -fx-font-family: "Times New Roman";
-    -fx-font-size: 18;
-    -fx-font-weight: bold;
-}
-
-#txtPlayerOne {
-    -fx-font-family: "Times New Roman";
-    -fx-font-size: 12;
-    -fx-border-radius: 15;
-    -fx-background-radius: 15;
-    -fx-border-width: 2px;
-    -fx-border-color: black;
-}
-
-#txtPlayerTwo {
-    -fx-font-family: "Times New Roman";
-    -fx-font-size: 12;
-    -fx-border-radius: 15;
-    -fx-background-radius: 15;
-    -fx-border-width: 2px;
-    -fx-border-color: black;
-}
-.button{
-    -fx-font-family: "Times New Roman";
-    -fx-font-size: 16;
-    -fx-font-weight: bold;
-    -fx-border-radius: 15;
-    -fx-border-width: 2px;
-    -fx-border-color: black;
-    -fx-background-radius: 15;
-    -fx-pref-height: 35px;
+.button:hover {
+    -fx-background-color: #3a4a5a;
+    -fx-text-fill: #f2c94c;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0.2, 0, 2);
 }

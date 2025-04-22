@@ -24,8 +24,7 @@ public class AIHardBoardController implements Initializable {
 
     private final ShipComputerPlacementManager computerShipsManager = ShipComputerPlacementManager.getInstance();
     private final int cellSize = 40;
-    private final int boardSize = 20; // Increased board size
-    private final String[][] computerBoard = new String[boardSize][boardSize];
+    private final String[][] computerBoard = new String[14][14];
     private final List<ShipUbication> placedShips = new ArrayList<>();
     private final Map<String, Integer> shipSizes = new HashMap<>();
     private final Map<String, Integer> shipLimits = new HashMap<>();
@@ -89,13 +88,13 @@ public class AIHardBoardController implements Initializable {
 
         shipLimits.put("Submarino", 4);
         shipLimits.put("Destructor", 3);
-        shipLimits.put("Crucero", 3);
+        shipLimits.put("Crucero", 2);
         shipLimits.put("Acorazado", 1);
     }
 
     private void initializeBoard() {
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
+        for (int i = 0; i < 14; i++) {
+            for (int j = 0; j < 14; j++) {
                 computerBoard[i][j] = "~";
             }
         }
@@ -113,8 +112,8 @@ public class AIHardBoardController implements Initializable {
             int size = shipSizes.get(type);
 
             while (placedByType.get(type) < max) {
-                int row = random.nextInt(boardSize);
-                int column = random.nextInt(boardSize);
+                int row = random.nextInt(14);
+                int column = random.nextInt(14);
                 boolean horizontal = random.nextBoolean();
 
                 if (canPutShips(row, column, size, horizontal)) {
@@ -127,12 +126,12 @@ public class AIHardBoardController implements Initializable {
 
     private boolean canPutShips(int row, int column, int size, boolean horizontal) {
         if (horizontal) {
-            if (column + size > boardSize) return false;
+            if (column + size > 14) return false;
             for (int i = 0; i < size; i++) {
                 if (!computerBoard[row][column + i].equals("~")) return false;
             }
         } else {
-            if (row + size > boardSize) return false;
+            if (row + size > 14) return false;
             for (int i = 0; i < size; i++) {
                 if (!computerBoard[row + i][column].equals("~")) return false;
             }
@@ -168,7 +167,11 @@ public class AIHardBoardController implements Initializable {
                 if (ship.horizontal) {
                     gc.drawImage(img, ship.column * cellSize, ship.row * cellSize, ship.size * cellSize, cellSize);
                 } else {
-                    gc.drawImage(img, ship.column * cellSize, ship.row * cellSize, cellSize, ship.size * cellSize);
+                    gc.save();
+                    gc.translate((ship.column + 1) * cellSize, ship.row * cellSize);
+                    gc.rotate(90);
+                    gc.drawImage(img, 0, 0, ship.size * cellSize, cellSize);
+                    gc.restore();
                 }
             } else {
                 gc.setFill(Color.GRAY);
@@ -181,9 +184,9 @@ public class AIHardBoardController implements Initializable {
         }
 
         gc.setStroke(Color.BLACK);
-        for (int i = 0; i <= boardSize; i++) {
-            gc.strokeLine(i * cellSize, 0, i * cellSize, cellSize * boardSize);
-            gc.strokeLine(0, i * cellSize, cellSize * boardSize, i * cellSize);
+        for (int i = 0; i <= 14; i++) {
+            gc.strokeLine(i * cellSize, 0, i * cellSize, cellSize * 14);
+            gc.strokeLine(0, i * cellSize, cellSize * 14, i * cellSize);
         }
     }
 
@@ -205,7 +208,7 @@ public class AIHardBoardController implements Initializable {
 
     public void switchToPlayerOneBoard(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Boards/playeroneeasyboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Boards/playeronenormalboard.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

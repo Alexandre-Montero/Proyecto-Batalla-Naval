@@ -1,6 +1,7 @@
 package Game.Controllers.Boards;
 
 import Game.Classes.ShipComputerPlacementManager;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +16,16 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.*;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 public class AIEasyBoardController implements Initializable {
-
+    
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    
     @FXML
     private Canvas canvasComputer;
 
@@ -36,8 +43,13 @@ public class AIEasyBoardController implements Initializable {
     private ImageView BtnShipCruise;
     @FXML
     private ImageView BtnShipArmored;
+    @FXML
+    private Button btnPlayerBoard;
+    @FXML
+    private Button btnPlay;
 
     private static class ShipUbication {
+
         int row, column, size;
         String type;
         boolean horizontal;
@@ -126,20 +138,29 @@ public class AIEasyBoardController implements Initializable {
 
     private boolean canPutShips(int row, int column, int size, boolean horizontal) {
         if (horizontal) {
-            if (column + size > 10) return false;
+            if (column + size > 10) {
+                return false;
+            }
             for (int i = 0; i < size; i++) {
-                if (!computerBoard[row][column + i].equals("~")) return false;
+                if (!computerBoard[row][column + i].equals("~")) {
+                    return false;
+                }
             }
         } else {
-            if (row + size > 10) return false;
+            if (row + size > 10) {
+                return false;
+            }
             for (int i = 0; i < size; i++) {
-                if (!computerBoard[row + i][column].equals("~")) return false;
+                if (!computerBoard[row + i][column].equals("~")) {
+                    return false;
+                }
             }
         }
         return true;
     }
 
     private void putShip(int row, int column, String type, int size, boolean horizontal) {
+        // Coloca los barcos en el tablero físico (la matriz de tablero)
         if (horizontal) {
             for (int i = 0; i < size; i++) {
                 computerBoard[row][column + i] = type;
@@ -150,17 +171,26 @@ public class AIEasyBoardController implements Initializable {
             }
         }
 
+        // Guardar la información de la ubicación del barco
         placedShips.add(new ShipUbication(row, column, type, size, horizontal));
+
+        // Agregar el barco al ShipComputerPlacementManager para gestionar las posiciones
         ShipComputerPlacementManager.ShipPlacement ship = new ShipComputerPlacementManager.ShipPlacement(row, column, type, size, horizontal);
         computerShipsManager.addShipsComputer(ship);
+
+        // Dibuja los barcos en el tablero
+        drawGrid();
     }
 
     private void drawGrid() {
-        if (canvasComputer == null) return;
+        if (canvasComputer == null) {
+            return;
+        }
 
         GraphicsContext gc = canvasComputer.getGraphicsContext2D();
         gc.clearRect(0, 0, canvasComputer.getWidth(), canvasComputer.getHeight());
 
+        // Dibujar los barcos colocados
         for (ShipUbication ship : placedShips) {
             Image img = getImageForShip(ship.type);
             if (img != null) {
@@ -174,7 +204,7 @@ public class AIEasyBoardController implements Initializable {
                     gc.restore();
                 }
             } else {
-                gc.setFill(Color.GRAY);
+                gc.setFill(Color.GRAY);  // Si no se puede cargar la imagen, dibujar un bloque gris
                 if (ship.horizontal) {
                     gc.fillRect(ship.column * cellSize, ship.row * cellSize, ship.size * cellSize, cellSize);
                 } else {
@@ -183,6 +213,7 @@ public class AIEasyBoardController implements Initializable {
             }
         }
 
+        // Dibujar la cuadrícula
         gc.setStroke(Color.BLACK);
         for (int i = 0; i <= 10; i++) {
             gc.strokeLine(i * cellSize, 0, i * cellSize, cellSize * 10);
@@ -206,15 +237,21 @@ public class AIEasyBoardController implements Initializable {
         }
     }
 
-    public void switchToPlayerOneBoard(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Boards/playeroneeasyboard.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @FXML
+    public void switchToGameBoard (ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/gameboard.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    public void switchToPlayerOneBoard (ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/playeroneeasyboard.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.GameBoardController">
+    <Label fx:id="lbPlayerOne" text="Player 1: " GridPane.rowIndex="0" GridPane.columnIndex="0" />
+    <Label fx:id="lbPlayerTwo" text="Player 2: " GridPane.rowIndex="1" GridPane.columnIndex="0" />
+    <Label fx:id="lbDifficulty" text="Difficulty: " GridPane.rowIndex="2" GridPane.columnIndex="0" />
+    <Canvas fx:id="playerCanvas" width="500" height="500" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+    <Canvas fx:id="computerCanvas" width="500" height="500" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+</GridPane>

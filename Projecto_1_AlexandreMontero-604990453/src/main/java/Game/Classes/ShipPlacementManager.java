@@ -21,9 +21,9 @@ public class ShipPlacementManager {
         playerShips.put(playerId, new ArrayList<>());
     }
 
-    public void addShipPlacement(String playerId, int row, int col, String type, int size, boolean isVertical) {
+    public void addShipPlacement(String playerId, int row, int col, String type, int size, boolean horizontal) {
         List<ShipPlacement> ships = playerShips.getOrDefault(playerId, new ArrayList<>());
-        ships.add(new ShipPlacement(row, col, type, size, isVertical));
+        ships.add(new ShipPlacement(row, col, type, size, horizontal));
         playerShips.put(playerId, ships);
     }
 
@@ -57,29 +57,29 @@ public class ShipPlacementManager {
     public static class ShipPlacement {
         public int row, column, size;
         public String type;
-        public boolean isVertical;
+        public boolean horizontal;  // Cambiado de isVertical a horizontal
 
-        public ShipPlacement(int row, int column, String type, int size, boolean isVertical) {
+        public ShipPlacement(int row, int column, String type, int size, boolean horizontal) {
             this.row = row;
             this.column = column;
             this.type = type;
             this.size = size;
-            this.isVertical = isVertical;
+            this.horizontal = horizontal;
         }
 
-        // Opcional: equals y hashCode para eliminar correctamente los objetos en remove
+        // Modificación de equals y hashCode para tener en cuenta el campo horizontal
         @Override
         public boolean equals(Object obj) {
             if (this == obj) return true;
             if (obj == null || getClass() != obj.getClass()) return false;
             ShipPlacement that = (ShipPlacement) obj;
             return row == that.row && column == that.column && size == that.size &&
-                    isVertical == that.isVertical && Objects.equals(type, that.type);
+                   horizontal == that.horizontal && Objects.equals(type, that.type);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(row, column, type, size, isVertical);
+            return Objects.hash(row, column, type, size, horizontal);
         }
     }
 }
