@@ -2,6 +2,7 @@ module Game {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.base;
+    requires java.desktop;
 
     opens Game to javafx.fxml;
     exports Game;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="650.0" prefWidth="820.0" style="-fx-background-color: white;" stylesheets="@../../Styles/Boards/aihardboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.Controllers.Boards.AIHardBoardController">
+    <children>
+        <Canvas fx:id="canvasComputer" height="560.0" layoutX="30.0" layoutY="40.0" width="580.0" />
+        <ImageView fx:id="BtnShipDestruyer" fitHeight="119.0" fitWidth="108.0" layoutX="637.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../Images/destructor.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="BtnShipSubmarine" fitHeight="101.0" fitWidth="118.0" layoutX="637.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../Images/submarine.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="BtnShipCruise" fitHeight="108.0" fitWidth="108.0" layoutX="637.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../Images/cruser.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="BtnShipArmored" fitHeight="108.0" fitWidth="94.0" layoutX="637.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../Images/battleship.png" />
+            </image>
+        </ImageView>
+        <Text layoutX="30.0" layoutY="36.0" strokeWidth="0.0" text="Pantalla de la AI" wrappingWidth="148.4722900390625" />
+      <Button fx:id="btnPlay" contentDisplay="CENTER" layoutX="104.0" layoutY="610.0" mnemonicParsing="false" onAction="#switchToGameBoard" text="Empezar" textAlignment="CENTER" />
+    </children>
+</AnchorPane>

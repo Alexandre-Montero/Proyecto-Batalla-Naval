@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import Game.Classes.GameState;
+import Game.Classes.GamePlayManager;
 
 public class DifficultyMenuController implements Initializable {
 
@@ -42,13 +44,13 @@ public class DifficultyMenuController implements Initializable {
                 uncheckOther(EasyMode);
             }
         });
-        
+
         NormalMode.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 uncheckOther(NormalMode);
             }
         });
-        
+
         HardMode.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 uncheckOther(HardMode);
@@ -68,13 +70,13 @@ public class DifficultyMenuController implements Initializable {
     @FXML
     public void switchToShips(ActionEvent event) throws IOException {
         String selectedDifficulty = "";
-
+        
         if (EasyMode.isSelected()) {
             selectedDifficulty = "Easy";
-        } 
+        }
         if (NormalMode.isSelected()) {
             selectedDifficulty = "Normal";
-        } 
+        }
         if (HardMode.isSelected()) {
             selectedDifficulty = "Hard";
         }
@@ -84,21 +86,30 @@ public class DifficultyMenuController implements Initializable {
             return;
         }
 
-        String fxmlFile = "";
+        // Obtener nombre del jugador desde GameState
+        String playerOne = GameState.getInstance().getPlayerOne();
+
+        // Configurar GamePlayManager como juego contra la IA
+        GamePlayManager gameManager = GamePlayManager.getInstance();
 
         switch (selectedDifficulty) {
             case "Easy":
-                fxmlFile = "/Fxml/Boards/easyboardplacesofships.fxml";
+                gameManager.setupPvAI(playerOne, GamePlayManager.Difficulty.EASY);
+                root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/playeroneeasyboard.fxml"));
                 break;
             case "Normal":
-                fxmlFile = "/Fxml/Boards/normalboardplacesofships.fxml";
+                gameManager.setupPvAI(playerOne, GamePlayManager.Difficulty.NORMAL);
+                root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/playeronenormalboard.fxml"));
                 break;
             case "Hard":
-                fxmlFile = "/Fxml/Boards/hardboardplacesofships.fxml";
+                gameManager.setupPvAI(playerOne, GamePlayManager.Difficulty.HARD);
+                root = FXMLLoader.load(getClass().getResource("/Fxml/Boards/playeronehardboard.fxml"));
                 break;
         }
+        
+        GameState.getInstance().setDifficulty(selectedDifficulty);
 
-        root = FXMLLoader.load(getClass().getResource(fxmlFile));
+        // Cambiar de escena
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -109,11 +120,11 @@ public class DifficultyMenuController implements Initializable {
         if (selected != EasyMode) {
             EasyMode.setSelected(false);
         }
-        
+
         if (selected != NormalMode) {
             NormalMode.setSelected(false);
         }
-        
+
         if (selected != HardMode) {
             HardMode.setSelected(false);
         }
